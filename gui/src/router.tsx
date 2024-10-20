@@ -15,6 +15,7 @@ import PagSolicCoodMunic from './pages/PagSolicCoordMunic';
 import PagSolicCoordProvinc from './pages/PagSolicCoordProvinc';
 import PagSolicitudes from './pages/PagSolicitudes';
 import PagSolicRegist from './pages/PagSolicRegist';
+import { ConfirmEmail } from './components/ConfirmEmail';
 
 
 export const router = createBrowserRouter([  
@@ -38,6 +39,8 @@ export const router = createBrowserRouter([
             { path: "/solic_coord_provinc", element: <PagSolicCoordProvinc /> },
             { path: "/solic_coord_munic", element: <PagSolicCoodMunic /> },
             { path: "/mi-perfil/*", element: <PagMiPerfil /> },  
+            { path: "/confirmar-email", element: <ConfirmEmail /> },  
+
         ],  
     },  
     

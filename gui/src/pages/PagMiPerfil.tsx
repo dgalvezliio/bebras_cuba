@@ -7,7 +7,6 @@ import { CuentaProfesor } from '../components/CuentaProfesor';
 import { EditarCuenta } from '../components/EditarCuenta';
 import { Route, Routes } from 'react-router-dom';
 
-
 export default function PagMiPerfil() {
     return (
         <MantineProvider>

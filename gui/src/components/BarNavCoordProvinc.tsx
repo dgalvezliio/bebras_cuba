@@ -2,6 +2,7 @@ import { Group, Burger, Container, rem, Menu, UnstyledButton, Avatar, Text } fro
 import { useDisclosure } from '@mantine/hooks';
 import {  } from '@tabler/icons-react';
 import classes from '../styles/BarNavInicial.module.css';
+import classe from '../styles/headerTabs.module.css';
 import {
     IconBrandMantine, IconChevronDown, IconLogout, IconUser
 } from '@tabler/icons-react';
@@ -64,7 +65,7 @@ export function BarNavCoordProvinc() {
                         >
                             <Menu.Target>
                             <UnstyledButton
-                                className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
+                                className={cx(classe.user, { [classe.userActive]: userMenuOpened })}
                             >
                                 <Group gap={7}>
                                 <Avatar src={user.image} alt={user.name} radius="xl" size={20} />

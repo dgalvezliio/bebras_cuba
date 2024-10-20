@@ -1,14 +1,32 @@
 import { Container, Card, Input, PasswordInput, Button, Text, TextInput, CloseButton } from '@mantine/core';
 import { Grid, Select, Checkbox, Title } from '@mantine/core';
 import { IconAt, IconPhone, IconLock, IconLockCheck, IconSchool, IconDeviceMobile, IconSend, IconId } from '@tabler/icons-react';
-import { useState } from 'react';
 import { IMaskInput } from 'react-imask';
 import { isEmail, useForm } from '@mantine/form';
+import { useEffect, useState } from 'react';  
+import axios from 'axios';  
 
 export function RegistrarProfe() {
     const [showSchoolRegistration, setShowSchoolRegistration] = useState(false);
     const [schoolSelectDisabled, setSchoolSelectDisabled] = useState(false);
     const [value, setValue] = useState('');
+    const [provincias, setProvincias] = useState([]);  
+
+    useEffect(() => {  
+        const fetchProvincias = async () => {  
+                try {  
+                const response = await axios.get('/api/provincias');  
+                const provincesData = response.data.map((p) => ({  
+                    value: p.provinceId,  
+                    label: p.provinceName,  
+                }));  
+                setProvincias(provincesData);  
+                } catch (error) {  
+                console.error('Error fetching provincias:', error);  
+                }  
+            };   
+            fetchProvincias();   
+    }, []); 
     
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {  
@@ -103,13 +121,6 @@ export function RegistrarProfe() {
                                     leftSection={<IconDeviceMobile size={16} />} 
                                     component={IMaskInput} mask="+53 00000000" 
                                     placeholder="Digite aqui su numero de telefono" 
-                                    // rightSection={
-                                    //     <CloseButton
-                                    //         aria-label="Clear input"
-                                    //         onClick={() => setValue('')}
-                                    //         style={{ display: value ? undefined : 'none' }}
-                                    //     />
-                                    // }
                                     {...form.getInputProps('phone')}
                                     
                                 />
@@ -144,7 +155,7 @@ export function RegistrarProfe() {
                                 withAsterisk
                                 clearable
                                 placeholder="Seleccione la provincia"
-                                data={['React', 'Angular', 'Vue', 'Svelte']}
+                                data={provincias} 
                                 {...form.getInputProps('province')}  
                             />
                         </Grid.Col>

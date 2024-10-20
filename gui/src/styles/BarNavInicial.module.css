@@ -52,12 +52,9 @@
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
 }
 
-.headerFixed {  
-    position: fixed;  
-    top: 0;  
-    left: 0;  
-    right: 0;  
-    z-index: 100;  
-    background-color: white; /* Ajusta el color de fondo según tus necesidades */  
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agrega una sombra si lo deseas */  
+.header {  
+  transition: position 0.3s ease-in-out;  
 }  
+
+
+

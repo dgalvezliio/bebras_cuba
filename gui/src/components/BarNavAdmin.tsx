@@ -3,7 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import classes from '../styles/BarNavInicial.module.css';
 import classe from '../styles/headerTabs.module.css';
 import {
-    IconBrandMantine, IconChevronDown, IconUserEdit, IconLogout, IconUser
+    IconBrandMantine, IconChevronDown, IconLogout, IconUser
 } from '@tabler/icons-react';
 import { Link, NavLink } from 'react-router-dom';
 import { ActionToggle } from './ActionToggle';
@@ -23,10 +23,10 @@ const links = [
 const user = {
     name: 'Robert Wolfkisser',
     email: 'janspoon@fighter.dev',
-    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
+    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
 };
 
-export function BarNavCoordNac() {
+export function BarNavAdmin() {
     const [opened, { toggle }] = useDisclosure(false);
     const [userMenuOpened, setUserMenuOpened] = useState(false);
 

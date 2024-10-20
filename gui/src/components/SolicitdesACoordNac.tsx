@@ -1,5 +1,4 @@
-import { Table, Container, Title, Checkbox, Fieldset, Group, ActionIcon, rem, Select, Badge, Avatar, Text, Anchor, Chip, Button, ButtonProps } from '@mantine/core';
-import { IconPencil, IconTrash, IconUserCheck, IconUserX } from '@tabler/icons-react';
+import { Table, Container, Title, Checkbox, Fieldset, Group, rem, Badge, Avatar, Text, Anchor, Button, ButtonProps } from '@mantine/core';
 import { useState } from 'react';
 import classes from '../styles/FeaturesCards.module.css';
 
@@ -14,7 +13,7 @@ import classes from '../styles/FeaturesCards.module.css';
       role: 'Collaborator',
       phone: '+44 (452) 886 09 12',
       lastActive: 'Cienfuegos',
-      active: false,
+      active: true,
     },
     {
       id: '2',
@@ -66,56 +65,13 @@ import classes from '../styles/FeaturesCards.module.css';
     },
   ];
 
-  const data1 = [
-    {
-        avatar:
-        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
-        name: 'Robert Wolfkisser',
-        job: 'provincial',
-        email: 'rob_wolf@gmail.com',
-        phone: '+44 (452) 886 09 12',
-    },
-    {
-        avatar:
-        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png',
-        name: 'Jill Jailbreaker',
-        job: 'Municipal',
-        email: 'jj@breaker.com',
-        phone: '+44 (934) 777 12 76',
-    },
-    {
-        avatar:
-        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
-        name: 'Henry Silkeater',
-        job: 'Municipal',
-        email: 'henry@silkeater.io',
-        phone: '+44 (901) 384 88 34',
-    },
-    {
-        avatar:
-        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
-        name: 'Bill Horsefighter',
-        job: 'municipal',
-        email: 'bhorsefighter@gmail.com',
-        phone: '+44 (667) 341 45 22',
-    },
-    {
-        avatar:
-        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-10.png',
-        name: 'Jeremy Footviewer',
-        job: 'provincial',
-        email: 'jeremy@foot.dev',
-        phone: '+44 (881) 245 65 65',
-    },
-    ];
-
     const jobColors: Record<string, string> = {
     provincial: 'blue',
     municipal: 'green',
     };
 
 export function SolitudesACoordNac() {
-    const [selectedRows, setSelectedRows] = useState<number[]>([]);
+    
     const [selection, setSelection] = useState<string[]>([]); 
     function SendFilesButton(props: ButtonProps & React.ComponentPropsWithoutRef<'button'>) {
       return <Button {...props} radius="md" classNames={classes} />;
@@ -193,11 +149,11 @@ export function SolitudesACoordNac() {
         <Table.Td>
           {item.active ? (
             <Badge color="teal" fullWidth variant="light">
-              Active
+              Aceptado
             </Badge>
           ) : (
             <Badge color="gray" fullWidth variant="light">
-              Disabled
+              En Proceso
             </Badge>
           )}
         </Table.Td>
@@ -207,7 +163,7 @@ export function SolitudesACoordNac() {
 
     return (
         <Container size='lg'>
-            <Title order={1}>Solicitudes</Title>
+            <Title order={1} >Solicitudes para Coordinador Provincial</Title>
             <Fieldset legend="Solicitudes de Registro como profesor">
             <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing="sm">
@@ -230,14 +186,14 @@ export function SolitudesACoordNac() {
                         // rightSection={<IconUserCheck style={{ width: rem(18) }} />}
                         variant='light'
                     >
-                        Habilitar
+                        Aceptar 
                     </SendFilesButton>
                     <SendFilesButton
                         leftSection="0"
                         // rightSection={<IconUserX style={{ width: rem(18) }} />}
                         variant='light'
                     >
-                        Deshabilitar
+                        Rechazar
                     </SendFilesButton>
                 </Group>
             </Fieldset>
@@ -271,14 +227,14 @@ export function SolitudesACoordNac() {
                         // rightSection={<IconUserCheck style={{ width: rem(18) }} />}
                         variant='light'
                     >
-                        Habilitar
+                        Aceptar
                     </SendFilesButton>
                     <SendFilesButton
                         leftSection="0"
                         // rightSection={<IconUserX style={{ width: rem(18) }} />}
                         variant='light'
                     >
-                        Deshabilitar
+                        Rechazar
                     </SendFilesButton>
                 </Group>
             </Fieldset>

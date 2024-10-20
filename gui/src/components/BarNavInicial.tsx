@@ -2,7 +2,6 @@ import { Menu, Group, Center, Burger, Container, rem, Button } from '@mantine/co
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown, IconUsersGroup, IconUser, IconLogin2 } from '@tabler/icons-react';
 import {  } from '@tabler/icons-react';
-// import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from '../styles/BarNavInicial.module.css';
 import { IconBrandMantine } from '@tabler/icons-react';
 import { Link, NavLink } from 'react-router-dom';
@@ -26,6 +25,20 @@ const links = [
 
 export function BarNavInicial() {
     
+    useEffect(() => {  
+            const handleScroll = () => {  
+            if (window.pageYOffset >= 80) { // Cambia este valor según la altura de la imagen  
+                setIsScrolled(true);  
+            } else {  
+                setIsScrolled(false);  
+            }  
+            };  
+        
+            window.addEventListener('scroll', handleScroll);  
+            return () => {  
+            window.removeEventListener('scroll', handleScroll);  
+            };  
+        }, []);
 
     const items = links.map((link) => {  
         const menuItems = link.links?.map((item) => (  
@@ -68,7 +81,7 @@ export function BarNavInicial() {
     const [isScrolled, setIsScrolled] = useState(false);  
     const [opened, { toggle }] = useDisclosure(false);  
     
-        useEffect(() => {  
+    useEffect(() => {  
         const handleScroll = () => {  
             if (window.pageYOffset > 0) {  
             setIsScrolled(true);  
@@ -86,12 +99,7 @@ export function BarNavInicial() {
     return (
         
         <header  className={`${classes.header} ${isScrolled ? classes.headerFixed : ''}`} >
-            {/* <Image  
-                // radius="md"  
-                src="https://bebrascuba.com/assets/images/logo.png" // Reemplaza con la URL de tu imagen  
-                h={200} // Ajusta la altura de la imagen según tus necesidades  
-                fallbackSrc="https://placehold.co/600x400?text=Placeholder" // Imagen de respaldo en caso de que no se cargue la principal  
-            /> */}
+            
             <Container size="lg">
                 
                 <div className={classes.inner}>
@@ -106,7 +114,7 @@ export function BarNavInicial() {
                 
                 <Group justify="center">
                     <ActionToggle />
-                    <Button radius={6} rightSection={<IconLogin2 size={16} />} size='sm' variant='outline' component={Link} to="/acceso" >Iniciar Sección</Button>
+                    <Button radius={6} rightSection={<IconLogin2 size={16} />} size='sm' variant='outline' component={Link} to="/acceso" >Iniciar Sesión</Button>
                 </Group>
                 <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
                 </div>

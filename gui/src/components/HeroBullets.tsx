@@ -9,7 +9,7 @@ export function HeroBullets() {
         <div className={classes.inner}>
             <div className={classes.content}>
             <Title className={classes.title}>
-                <span className={classes.highlight}>BebrasCuba</span> React <br /> components library
+                <span className={classes.highlight}>BebrasCuba</span> Concurso <br /> de computación
             </Title>
             <Text c="dimmed" mt="md">
                 Build fully functional accessible web applications faster than ever – Mantine includes

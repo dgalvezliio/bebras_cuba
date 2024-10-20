@@ -14,19 +14,19 @@ import classes from '../styles/FeaturesCards.module.css';
 
 const mockdata = [
     {
-    title: 'Extreme performance',
+    title: '¿Que es Bebras?',
     description:
         'This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit',
     icon: IconGauge,
     },
     {
-    title: 'Privacy focused',
+    title: 'Eventos',
     description:
         'People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma',
     icon: IconUser,
     },
     {
-    title: 'No third parties',
+    title: 'Fechas',
     description:
         'They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves',
     icon: IconCookie,

@@ -1,9 +1,8 @@
 import { Container, Title, Button, Group, ButtonProps, rem, Grid, Text, Radio, Card, FileInputProps, Pill, FileInput, Table, Checkbox, ActionIcon } from '@mantine/core';
 import { Fieldset } from '@mantine/core';
-import { IconUserX, IconUserCheck, IconWashDrycleanOff, IconUpload, IconPencil, IconTrash } from '@tabler/icons-react';
+import { IconWashDrycleanOff, IconUpload, IconPencil, IconTrash } from '@tabler/icons-react';
 import classes from '../styles/FeaturesCards.module.css';
-import { TablaProfes } from './TablaProfes';
-import { TablaCoord } from './TablaCoord';
+
 import { DateInput } from '@mantine/dates';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -81,29 +80,6 @@ export function GestionarConcurso() {
             <Title order={2} className={classes.title} ta="center" mb='sm'>
                 Gestionar el Concurso
             </Title>
-
-            <Fieldset legend="Información de los coordinadores">
-                <TablaCoord />
-            </Fieldset>
-
-            <Fieldset mt={20} legend="Información de los profesores">
-                <TablaProfes />
-                <Group>
-                    <SendFilesButton
-                        leftSection="0"
-                        rightSection={<IconUserCheck style={{ width: rem(18) }} />}
-                    >
-                        Habilitar
-                    </SendFilesButton>
-                    <SendFilesButton
-                        leftSection="0"
-                        rightSection={<IconUserX style={{ width: rem(18) }} />}
-                    >
-                        Deshabilitar
-                    </SendFilesButton>
-                </Group>
-            </Fieldset>
-                
             <Fieldset mt={20} legend="Administrar Edición">
                 <Grid>
                     <Grid.Col span={6}>
