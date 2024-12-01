@@ -18,13 +18,13 @@ export function ConfirmEmail() {
         <Container size="xs" >
             <Card padding="md" withBorder shadow="md" p={30} mt={30} radius="md">
 
-                <Title order={3} ta="center" mb={5}>Recuperar la Contraseña</Title>
+                <Title order={3} ta="center" mb={5}>Confirmar correo electrónico</Title>
                 
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
                     <TextInput
                         withAsterisk
-                        label="Correo electronico"
-                        placeholder="your@email.com"
+                        label="Correo electrónico"
+                        placeholder="Digite aqui su correo electrónico"
                         key={form.key('email')}
                         {...form.getInputProps('email')}
                     />

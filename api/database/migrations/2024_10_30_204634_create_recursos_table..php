@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('escuela', function (Blueprint $table) { 
+        Schema::create('recursos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');  
-            $table->string('nombre_escuela');  
-            $table->string('telefono');  
-            $table->string('subsistema');  
-            $table->string('municipio');  
-            $table->string('poblado');
-            $table->timestamps();  
-        }); 
+            $table->string('nombre', 100); // Nombre del recurso
+            $table->string('descripcion', 255)->nullable(); // Descripción opcional del recurso
+            $table->string('archivo_path'); // Ruta al archivo PDF
+            $table->timestamps();
+        });
+        
     }
 
     /**
@@ -30,5 +28,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('recursos');
     }
 };

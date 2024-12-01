@@ -51,10 +51,10 @@
 .link {
   display: block;
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-1));
-  font-size: var(--mantine-font-size-sm);
+  font-size: var(--mantine-font-size-ms);
   padding-top: rem(3px);
   padding-bottom: rem(3px);
-
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
@@ -82,6 +82,14 @@
   @media (max-width: $mantine-breakpoint-sm) {
     flex-direction: column;
   }
+}
+
+.contacto {
+  
+}
+.contacto:hover {
+  cursor: pointer;
+  color: dimgray;
 }
 
 .social {

@@ -1,4 +1,4 @@
-import { Group, Burger, Container, rem, Menu, UnstyledButton, Avatar, Text, Indicator } from '@mantine/core';
+import { Group, Burger, Container, rem, Menu, UnstyledButton, Avatar, Text, Indicator, Tooltip } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from '../styles/BarNavInicial.module.css';
 import classe from '../styles/headerTabs.module.css';
@@ -54,16 +54,18 @@ export function BarNavCoordNac() {
                 </Group>
                 <Group>
                     <ActionToggle />
+                    <Tooltip arrowPosition="side" arrowOffset={25} arrowSize={5} label="Notificaciones" withArrow position="bottom">
                     <Indicator inline label="50" color='red' size={16}>
                         <BotonSolicitud />
                     </Indicator>
+                    </Tooltip>
                     <Menu
-                            width={260}
-                            position="bottom-end"
-                            transitionProps={{ transition: 'pop-top-right' }}
-                            onClose={() => setUserMenuOpened(false)}
-                            onOpen={() => setUserMenuOpened(true)}
-                            withinPortal
+                        width={260}
+                        position="bottom-end"
+                        transitionProps={{ transition: 'pop-top-right' }}
+                        onClose={() => setUserMenuOpened(false)}
+                        onOpen={() => setUserMenuOpened(true)}
+                        withinPortal
                         >
                             <Menu.Target>
                             <UnstyledButton

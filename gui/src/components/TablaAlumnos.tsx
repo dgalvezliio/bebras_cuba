@@ -1,10 +1,10 @@
 import cx from 'clsx';
 import { useState } from 'react';
-import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, ActionIcon } from '@mantine/core';
+import { Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, ActionIcon, Grid, Select } from '@mantine/core';
 import classes from '../styles/TablaAlumnos.module.css';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button,Input } from '@mantine/core';
+import { Modal, Button } from '@mantine/core';
 const data = [
   {
     id: '1',
@@ -13,7 +13,8 @@ const data = [
     name: 'Robert Wolfkisser',
     job: 'Masculino',
     email: 'Chiqui Gómez Lubián Urioste',
-    grade: '6to'
+    grade: '6to',
+    categoria: 'Junior',
   },
   {
     id: '2',
@@ -22,7 +23,8 @@ const data = [
     name: 'Jill Jailbreaker',
     job: 'Femenino',
     email: 'José Antonio Echeverría',
-    grade: '6to'
+    grade: '6to',
+    categoria: 'Junior',
   },
   {
     id: '3',
@@ -31,7 +33,8 @@ const data = [
     name: 'Henry Silkeater',
     job: 'Masculino',
     email: 'José Antonio Echeverría',
-    grade: '5to'
+    grade: '5to',
+    categoria: 'Junior',
   },
   {
     id: '4',
@@ -40,7 +43,8 @@ const data = [
     name: 'Bill Horsefighter',
     job: 'Masculino',
     email: 'Chiqui Gómez Lubián Urioste',
-    grade: '5to'
+    grade: '5to',
+    categoria: 'Junior',
   },
   {
     id: '5',
@@ -49,7 +53,8 @@ const data = [
     name: 'Jeremy Footviewer',
     job: 'Feminino',
     email: 'Chiqui Gómez Lubián Urioste',
-    grade: '5to'
+    grade: '5to',
+    categoria: 'Junior',
   }
   
 ];
@@ -82,6 +87,7 @@ export function TablaAlumnos() {
         <Table.Td>{item.email}</Table.Td>
         <Table.Td>{item.job}</Table.Td>
         <Table.Td>{item.grade}</Table.Td>
+        <Table.Td>{item.categoria}</Table.Td>
         <Table.Td>
           <Group gap={0} justify="flex-end">
             <ActionIcon  onClick={open} variant="subtle" color="gray">
@@ -102,9 +108,36 @@ export function TablaAlumnos() {
 
       <Modal opened={opened} onClose={close} title="Editar datos">
         {/* G */}
-        <Input.Wrapper label="Nombre Completo">
-          <Input placeholder="Digite el nombre del alumno" />
-        </Input.Wrapper>
+        <Select
+          mt={5}
+          mb={10}
+          withAsterisk
+          label="Escuela"
+          clearable
+          placeholder="Seleccione la escuela"
+          data={['React', 'Angular', 'Vue', 'Svelte']}
+        />
+        <Grid mt={10}>
+          
+          <Grid.Col span={6}>
+              <Select
+                  label="Grado"
+                  withAsterisk
+                  placeholder="Seleccione el grado"
+                  clearable
+                  data={['1ro', '2do', '3ro', '4to', '5to', '6to', '7mo', '8vo', '9no', '10mo', '11ro', '12do']}
+              />
+          </Grid.Col>
+          <Grid.Col span={6}>
+              <Select
+                  label="Categoria"
+                  withAsterisk
+                  placeholder="Seleccione el grado"
+                  clearable
+                  data={['Peques','Benjamin','Junior','Senior']}
+              />
+          </Grid.Col>
+      </Grid>
         
         <Group mt={10}>
           <Button variant="filled">Guardar cambio</Button>
@@ -126,6 +159,7 @@ export function TablaAlumnos() {
             <Table.Th>Escuela</Table.Th>
             <Table.Th>Sexo</Table.Th>
             <Table.Th>Grado</Table.Th>
+            <Table.Th>Categoria</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

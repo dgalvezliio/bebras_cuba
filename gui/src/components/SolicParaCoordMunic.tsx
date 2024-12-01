@@ -1,4 +1,4 @@
-import { Table, Container, Title, Checkbox, Fieldset, Group, rem, Badge, Avatar, Text, Anchor, Button, ButtonProps } from '@mantine/core';
+import { Table, Container, Title, Checkbox, Fieldset, Group, rem, Badge, Avatar, Text, Anchor, Button, ButtonProps, Switch, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 import classes from '../styles/FeaturesCards.module.css';
 import { IconCheck, IconX } from '@tabler/icons-react';
@@ -26,7 +26,7 @@ import { IconCheck, IconX } from '@tabler/icons-react';
             role: 'Collaborator',
             phone: '+44 (934) 777 12 76',
             lastActive: 'Habana',
-            active: false,
+            active: true,
         },
         {
             id: '3',
@@ -67,51 +67,18 @@ import { IconCheck, IconX } from '@tabler/icons-react';
     ];
 
 export function SolicParaCoordMunic() {
-    // const [selectedRows, setSelectedRows] = useState<number[]>([]);
+    const theme = useMantineTheme();
     const [selection, setSelection] = useState<string[]>([]); 
     const [selectedCount, setSelectedCount] = useState(0);  
-
+    const [checked, setChecked] = useState(false);
+    
     function SendFilesButton(props: ButtonProps & React.ComponentPropsWithoutRef<'button'>) {
         return <Button {...props} radius="md" classNames={classes} />;
     }
-    // const rows = data.map((item) => (
-    //     <Table.Tr key={item.name}>
-    //     <Table.Td>
-    //         <Group gap="sm">
-    //         <Avatar size={30} src={item.avatar} radius={30} />
-    //         <Text fz="sm" fw={500}>
-    //             {item.name}
-    //         </Text>
-    //         </Group>
-    //     </Table.Td>
-
-    //     <Table.Td>
-    //         <Badge color={jobColors[item.job.toLowerCase()]} variant="light">
-    //             {item.job}
-    //         </Badge>
-    //     </Table.Td>
-    //     <Table.Td>
-    //         <Anchor component="button" size="sm">
-    //             {item.email}
-    //         </Anchor>
-    //     </Table.Td>
-    //     <Table.Td>
-    //         <Text fz="sm">{item.phone}</Text>
-    //     </Table.Td>
-    //     <Table.Td>
-    //     {item.active ? (
-    //             <Badge color="teal" fullWidth variant="light">
-    //             Active
-    //             </Badge>
-    //         ) : (
-    //             <Badge color="gray" fullWidth variant="light">
-    //             Disabled
-    //             </Badge>
-    //         )}
-    //     </Table.Td>
-    //     </Table.Tr>
-    // ));
-        const toggleRow = (id: string) => {  
+    const [statuses, setStatuses] = useState<{ [key: string]: boolean }>(
+        Object.fromEntries(data.map(item => [item.id, item.active]))
+    );
+    const toggleRow = (id: string) => {  
         setSelection((current) => {  
             if (current.includes(id)) {  
                 setSelectedCount(selectedCount - 1);  
@@ -132,90 +99,131 @@ export function SolicParaCoordMunic() {
             setSelection(data.map((item) => item.id));  
         }  
     };  
-    
-    const row = data.map((item) => (
-        <Table.Tr key={item.name}>
+
+    const handleAccept = () => {
+        setStatuses(current => ({
+            ...current,
+            ...Object.fromEntries(selection.map(id => [id, true]))
+        }));
+    };
+
+    const handleDeny = () => {
+        setStatuses(current => ({
+            ...current,
+            ...Object.fromEntries(selection.map(id => [id, false]))
+        }));
+    };
+
+    const row = data.map(item => (
+        <Table.Tr key={item.id}>
             <Table.Td>
-            <Checkbox checked={selection.includes(item.id)} onChange={() => toggleRow(item.id)} />  
+                <Checkbox
+                    checked={selection.includes(item.id)}
+                    onChange={() => toggleRow(item.id)}
+                />
             </Table.Td>
             <Table.Td>
-            <Group gap="sm">
-                <Avatar size={40} src={item.avatar} radius={40} />
-                <div>
-                <Text fz="sm" fw={500}>
-                    {item.name}
-                </Text>
-                <Text fz="xs" c="dimmed">
+                <Group gap="sm">
+                    <Avatar size={40} src={item.avatar} radius={40} />
+                    <div>
+                        <Text fz="sm" fw={500}>
+                            {item.name}
+                        </Text>
+                        <Text fz="xs" c="dimmed">
+                            {item.email}
+                        </Text>
+                    </div>
+                </Group>
+            </Table.Td>
+            <Table.Td>{item.phone}</Table.Td>
+            <Table.Td>{item.lastActive}</Table.Td>
+            <Table.Td>{item.job}</Table.Td>
+            <Table.Td>
+                <Anchor component="button" size="sm">
                     {item.email}
-                </Text>
-                </div>
-            </Group>
-        </Table.Td>
-        <Table.Td>{item.phone}</Table.Td>
-        <Table.Td>{item.lastActive}</Table.Td>
-        <Table.Td>{item.job}</Table.Td>
-        <Table.Td>
-        <Anchor component="button" size="sm">
-            {item.email}
-        </Anchor></Table.Td>
-        <Table.Td>
-        {item.active ? (
-            <Badge color="teal" fullWidth variant="light">
-            Active
-            </Badge>
-        ) : (
-            <Badge color="gray" fullWidth variant="light">
-            Disabled
-            </Badge>
-        )}
-        </Table.Td>
+                </Anchor>
+            </Table.Td>
+            <Table.Td>
+                <Switch
+                    
+                    onChange={() =>
+                        setStatuses(current => ({
+                            ...current,
+                            [item.id]: !current[item.id]
+                        }))
+                    }
+                    color="teal"
+                    size="md"
+                    thumbIcon={
+                        statuses[item.id] ? (
+                            <IconCheck
+                                style={{ width: rem(12), height: rem(12) }}
+                                color={theme.colors.teal[6]}
+                                stroke={3}
+                            />
+                        ) : (
+                            <IconX
+                                style={{ width: rem(12), height: rem(12) }}
+                                color={theme.colors.red[6]}
+                                stroke={3}
+                            />
+                        )
+                    }
+                />
+            </Table.Td>
         </Table.Tr>
     ));
     
     return (
         <Container size='lg'>
             <Title ta="center" order={1}>Solicitudes para <Text span c="violet" inherit>Coordinador Municipal </Text></Title>
-            {/* TABLA DE SOLICITUDES ↓ */}
+            {/* TABLA DE SOLICITUDES */}
             <Fieldset mt={10} legend="Solicitudes de Registro de escuela">
                 <Table.ScrollContainer minWidth={800}>
-        <Table verticalSpacing="sm">
-            <Table.Thead>
-            <Table.Tr>
-                <Table.Th style={{ width: rem(40) }}>
-                <Checkbox
-                    onChange={toggleAll}
-                    checked={selection.length === data.length}
-                    indeterminate={selection.length > 0 && selection.length !== data.length}
-                />
-                </Table.Th>
-                <Table.Th>Nombre</Table.Th>
-                <Table.Th>Telefono</Table.Th>
-                <Table.Th>Provincia</Table.Th>
-                <Table.Th>Municipio</Table.Th>
-                <Table.Th>Solicitud</Table.Th>
-                <Table.Th>Estado</Table.Th>
-            </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{row}</Table.Tbody>
-        </Table>
+                    <Table verticalSpacing="sm">
+                        <Table.Thead>
+                        <Table.Tr>
+                            <Table.Th style={{ width: rem(40) }}>
+                            <Checkbox
+                                        onChange={toggleAll}
+                                        checked={selection.length === data.length}
+                                        indeterminate={selection.length > 0 && selection.length !== data.length}
+                                    />
+                            </Table.Th>
+                            <Table.Th>Nombre</Table.Th>
+                            <Table.Th>Telefono</Table.Th>
+                            <Table.Th>Provincia</Table.Th>
+                            <Table.Th>Municipio</Table.Th>
+                            <Table.Th>Solicitud</Table.Th>
+                            <Table.Th>Estado</Table.Th>
+                        </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody>{row}</Table.Tbody>
+                    </Table>
                 </Table.ScrollContainer>
                 <Group>  
-                    <SendFilesButton  
-                        leftSection={selectedCount.toString()}  
-                        rightSection={<IconCheck style={{ width: rem(18) }} />}  
-                        variant='light'  
-                    >  
-                        Aceptar  
+                <SendFilesButton
+                        leftSection={selectedCount.toString()}
+                        rightSection={<IconCheck style={{ width: rem(18) }} />}
+                        variant="light"
+                        onClick={handleAccept}
+                    >
+                        Aceptar
                     </SendFilesButton>  
-                    <SendFilesButton  
-                        leftSection={selectedCount.toString()}  
-                        rightSection={<IconX style={{ width: rem(18) }} />}  
-                        variant='light'  
-                    >  
-                        Denegar  
-                    </SendFilesButton>  
+                    <SendFilesButton
+                        leftSection={selectedCount.toString()}
+                        rightSection={<IconX style={{ width: rem(18) }} />}
+                        variant="light"
+                        onClick={handleDeny}
+                    >
+                        Denegar
+                    </SendFilesButton>
                 </Group>  
             </Fieldset>
         </Container>
     );
+}
+
+function setStatuses(arg0: (current: any) => any) {
+    throw new Error('Function not implemented.');
 }

@@ -1,4 +1,4 @@
-import { Paper, Text, Title, Button, Container, Grid, Tooltip } from '@mantine/core';
+import { Paper, Text, Title, Button, Container, Grid, Tooltip, Group } from '@mantine/core';
 import classes from '../styles/Recurso.module.css';
 import { IconDownload, IconUpload  } from '@tabler/icons-react';
 import { ActionIcon } from '@mantine/core';
@@ -7,91 +7,40 @@ import { IconAdjustments } from '@tabler/icons-react';
 export function Recurso() {
     return (
 
-        <Container>
+        <Container mt={50}>
 
             <Title order={2} size={40} ta="center">Recursos de apoyo al concurso BebrasCuba</Title>
             <Text c="dimmed" ta="center" mb={30}>Documentos de apoyo y guia de cada convocatoria eso incluye los llamados</Text>
 
-            <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }}>
-                <Grid.Col span={4}>
-                    <Paper shadow="md" p="xl" radius="md" className={classes.card}>
-                        <div>
-                            <Text className={classes.category} size="xs">
-                                concurso bebrascuba
-                            </Text>
-                            
-                            <Title order={3} className={classes.title}>
-                                Best forests to visit in North America
-                            </Title>
-                        </div>
-                        <Grid>
-                            <Grid.Col span={4}>
-                                <Button variant="white" color="dark">
-                                    Leer archivo
-                                </Button>
-                            </Grid.Col>
-                            <Grid.Col ml={50} span={4}>
-                                <ActionIcon size={35} variant="white" color="dark" >
-                                    <IconUpload  style={{ width: '70%', height: '70%' }} stroke={1.5} />
-                                </ActionIcon>
-                            </Grid.Col>
-                        </Grid>
-                    </Paper>
-                </Grid.Col>
+            <Paper shadow="lg" p="lg" withBorder mb={10}>
+                <Text>Concurso Bebras Cuba – Edición 3</Text>
+                <Group mr={10} justify='space-between'>
+                    <Group>
+                        <Text c="dimmed">
+                            CONVOCATORIA 2024 – primer llamado (breve)
+                        </Text>
+                    </Group>
+                    <Group>
+                        {/* <Button variant="default" rightSection={<IconDownload size={15} />}>Leer archivo</Button> */}
+                        <Button variant="default" rightSection={<IconDownload size={15} />}>Descargar</Button>
+                    </Group>
+                </Group>
+            </Paper>
+            <Paper shadow="lg" p="lg" withBorder >
                 
-                <Grid.Col span={4}>
-                    <Paper shadow="md" p="xl" radius="md" className={classes.card}>
-                        <div>
-                            <Text className={classes.category} size="xs">
-                                concurso bebrascuba
-                            </Text>
-                            <Title order={3} className={classes.title}>
-                                Best forests to visit in North America
-                            </Title>
-                        </div>
-                        <Grid>
-                            <Grid.Col span={4}>
-                                <Button variant="white" color="dark">
-                                    Leer archivo
-                                </Button>
-                            </Grid.Col>
-                            <Grid.Col ml={50} span={4}>
-                                <ActionIcon size={35} variant="white" color="dark" >
-                                    <IconUpload  style={{ width: '70%', height: '70%' }} stroke={1.5} />
-                                </ActionIcon>
-                            </Grid.Col>
-                        </Grid>
-                        
-                    </Paper>
-                </Grid.Col>
-
-                <Grid.Col span={4}>
-                    <Paper shadow="md" p="xl" radius="md" className={classes.card}>
-                        <div>
-                            <Text className={classes.category} size="xs">
-                                concurso bebrascuba
-                            </Text>
-                            <Title order={3} className={classes.title}>
-                                Best forests to visit in North America
-                            </Title>
-                        </div>
-                        <Grid>
-                            <Grid.Col span={4}>
-                                <Button variant="white" color="dark">
-                                    Leer archivo
-                                </Button>
-                            </Grid.Col>
-                            <Grid.Col ml={50} span={4}>
-                                <Tooltip arrowOffset={34} arrowSize={5} label="Descargar" withArrow  >
-                                    <ActionIcon size={35} variant="white" color="dark" >
-                                        <IconUpload  style={{ width: '70%', height: '70%' }} stroke={1.5} />
-                                    </ActionIcon>
-                                </Tooltip>
-                            </Grid.Col>
-                        </Grid>
-                    </Paper>
-                </Grid.Col>
-            </Grid>
+                <Text>Concurso Bebras Cuba – Edición 3</Text>
+                <Group mr={10} justify='space-between'>
+                    <Group>
+                        <Text c="dimmed">
+                            CONVOCATORIA 2024 – segundo llamado (breve)
+                        </Text>
+                    </Group>
+                    <Group>
+                        {/* <Button variant="default" rightSection={<IconDownload size={15} />}>Leer archivo</Button> */}
+                        <Button variant="default" rightSection={<IconDownload size={15} />}>Descargar</Button>
+                    </Group>
+                </Group>
+            </Paper>
             
         </Container>
     );

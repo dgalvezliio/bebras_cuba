@@ -15,38 +15,46 @@ import { IconMailFilled, IconLockFilled } from '@tabler/icons-react';
 import { isEmail, useForm } from '@mantine/form';
 import { useState } from 'react';
 
-export function LoginLinks() {
+interface LoginLinksProps {
 
-    const [email, setEmail] = useState('');  
-    const [password, setPassword] = useState('');  
-    const navigate = useNavigate();
+     setUserRole: (role: string) => void; // El tipo de setUserRole
     
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {  
-        e.preventDefault();  
-        // Aquí deberías verificar si el email y la contraseña son "rcabralm@uclv.edu.cu" y "rcm2024*"  
-        if (email === 'rcabralm@uclv.edu.cu' && password === 'rcm2024*') {  
-          // Si son válidos, actualiza el estado del rol del usuario en el componente App  
-            setUserRole('profesor');  
-            navigate('/dashboard');  
-        } else {  
-          // Maneja el error de inicio de sesión  
-            console.error('Credenciales inválidas');  
-        }  
-    }; 
+    }
+export function LoginLinks({ setUserRole }: LoginLinksProps) { // Recibe setUserRole como prop
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState(''); 
+    const navigate = useNavigate(); 
+    
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
+    e.preventDefault(); 
+        // Verificar las credenciales
+        if (email === 'rcabralm@uclv.edu.cu' && password === 'secret') { 
+        setUserRole('profesor'); // Cambia el rol a 'profesor'
+        alert('Usuario y contraseña correcto!');
+        navigate('/');
+            } else if (email === 'dgalves@uclv.edu.cu' && password === 'liogalves1980.*') { 
+            setUserRole('coordinador_nacional'); // Cambia el rol a 'coordinador nacional'
+            alert('Usuario y contraseña correcto!');
+            // navigate('/');
+            // links.push({ link: '/admin', label: 'Administrar' });
+        } else {  
+            alert('Usuario y contraseña incorrecto!');
+            console.error('Credenciales inválidas'); 
+        }
+    };
 
-    const form = useForm({
-        mode: 'uncontrolled',
-        initialValues: { name: '', email: '', age: 0, password: 'secret',
-            confirmPassword: '', },
-        // functions will be used to validate values at corresponding key
-        validate: {
-            name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
-            email: isEmail('Invalid email'),
-            age: (value) => (value < 18 ? 'You must be at least 18 to register' : null),
-            confirmPassword: (value, values) =>
-            value !== values.password ? 'Passwords did not match' : null,
-        },
-    });
+    // const form = useForm({
+    //     mode: 'uncontrolled',
+    //     initialValues: { email: 'rcabralm@uclv.edu.cu', password: 'secret',
+    //         confirmPassword: '', },
+            
+    //     // functions will be used to validate values at corresponding key
+    //     validate: {
+    //         email: isEmail('Invalid email'),
+    //         confirmPassword: (value, values) =>
+    //         value !== values.password ? 'Passwords did not match' : null,
+    //     },
+    // });
 
     return (
     <Container size={450} my={40}>
@@ -56,29 +64,33 @@ export function LoginLinks() {
         <Text c="dimmed" size="sm" ta="center" mt={5}>
         No tienes una cuenta?{' '}
         <Anchor size="sm" component={Link}  
-            to="/registro" >
+            to="/confirmar-email" >
             Crear una cuenta
         </Anchor>
         </Text>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            
-            <form onSubmit={form.onSubmit(console.log)}>
+            {/* <Text c={'red'} fw={500} ta="center" mb={5}>Usuario o contraseña incorrecto!</Text> */}
+            <form onSubmit={handleSubmit}>
             
                 <TextInput 
                     leftSection={<IconMailFilled size={16} />}
                     label="Correo Electrónico"
-                    placeholder="you@mantine.dev"
-                    key={form.key('email')}
-                    {...form.getInputProps('email')}
+                    placeholder="Digite su correo electrónico"
+                    // key={form.key('email')}
+                    // {...form.getInputProps('email')}
+                    value={email} // Asigna el valor del estado
+                    onChange={(e) => setEmail(e.currentTarget.value)} 
                 />
                 <PasswordInput 
                     leftSection={<IconLockFilled  size={16} />} 
                     label="Contraseña" 
                     placeholder="Digite su contrasña" 
                     mt="md" 
-                    key={form.key('confirmPassword')}
-                    {...form.getInputProps('confirmPassword')}
+                    // key={form.key('confirmPassword')}
+                    // {...form.getInputProps('confirmPassword')}
+                    value={password} // Asigna el valor del estado
+                    onChange={(e) => setPassword(e.currentTarget.value)}
                 />
                 
                 <Group justify="space-between" mt="lg">
@@ -87,7 +99,7 @@ export function LoginLinks() {
                         Olvidé la contraseña
                     </Anchor>
                 </Group>
-                <Button fullWidth type="submit" mt="sm" >
+                <Button fullWidth type="submit" mt="sm">
                     Iniciar Sección
                 </Button>
             </form>

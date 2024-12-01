@@ -94,6 +94,7 @@ export function BarNavProfe() {
                                 leftSection={
                                 <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
                                 }
+                                component={Link} to="/acceso"
                             >
                                 Cerrar sección
                             </Menu.Item>

@@ -9,13 +9,15 @@ class Edicion extends Model
 {
     use HasFactory;
     
-    protected $table = 'edicion';
+    protected $table = 'ediciones';
 
     protected $fillable = [
-        'nro_edicion',
-        'nombre',
-        'anio',
-        'fecha_inicio',
-        'fecha_fin'
+        'n_edicion',
+        'a_edicion',
+        'fecha_inic_inscrip',
+        'fecha_fin_inscrip',
+        'fecha_inic_realiz',
+        'fecha_fin_realiz',
+        'abierto',
     ];
 }

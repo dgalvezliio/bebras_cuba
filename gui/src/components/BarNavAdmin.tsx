@@ -2,6 +2,7 @@ import { Group, Burger, Container, rem, Menu, UnstyledButton, Avatar, Text, Indi
 import { useDisclosure } from '@mantine/hooks';
 import classes from '../styles/BarNavInicial.module.css';
 import classe from '../styles/headerTabs.module.css';
+
 import {
     IconBrandMantine, IconChevronDown, IconLogout, IconUser
 } from '@tabler/icons-react';
@@ -15,7 +16,7 @@ import { BotonSolicitud } from './BotonSolicitud';
 const links = [
     { link: '/', label: 'Inicio' },
     { link: '/recurso', label: 'Recurso' },
-    { link: '/gestionar_concurso', label: 'Gestionar concurso' },
+    { link: '/gestionar_concurso', label: 'Administrar concurso' },
     { link: '/geobebras', label: 'GeoBebras' },
     
     ];
@@ -23,7 +24,7 @@ const links = [
 const user = {
     name: 'Robert Wolfkisser',
     email: 'janspoon@fighter.dev',
-    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
+    image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
 };
 
 export function BarNavAdmin() {

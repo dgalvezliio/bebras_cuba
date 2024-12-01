@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\EstudianteController;
+
+use App\Models\Edicion;
+use App\Models\Profesor;
+use App\Models\Escuela;
+use App\Models\EstudianteEscuela;
+use App\Models\ProfesorEstudiante;
 
 class EstudianteController extends Controller
 {
@@ -13,7 +20,6 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        //
         $estudiantes = Estudiante::all();
 
         if ($estudiantes -> isEmpty()) {
@@ -28,92 +34,112 @@ class EstudianteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function inscribir(Request $request)
     {
-        //
-        $validator = Validator::make($request->all(), [
-        'nombre'=> 'required',
-        'nro_ci'=> 'required',
-        'grado'=> 'required',
-        'genero'=> 'required',
-        'puntuacion'=> 'required',
-        'cdgo_profesor' => 'required',
-        'cdgo_escuela' => 'required'
+        $edicionActual = Edicion::where('abierto', true)->first();  
+        if (!$edicionActual) {  
+            return response()->json(['message' => 'No hay una edición abierta, por lo que no se puede registrar un nuevo profesor.'], 400);  
+        } 
+        // Validar los datos de entrada
+        $$validatedData = $request->validate([
+            'nro_ci' => 'required|string|size:11|unique:estudiantes,nro_ci',
+            'nombre' => 'required|string|max:80',
+            'sexo' => 'required|in:Masculino,Femenino',
+            'id_profesor' => 'required|exists:profesores,id',
+            'id_escuela' => 'required|exists:escuelas,id',
+            'edicion' => 'required|exists:ediciones,n_edicion',
+            'grado' => 'required|integer|min:1|max:12',
         ]);
 
-        if($validator->fails()) {
-            $data = [
-                'message' => 'Error en la validacion de datos',
-                'errors' => $validator -> errors(),
-                'status' => 404
-            ];
-            return response() -> json($data, 404);
+        try {
+            // Crear el estudiante en la tabla 'estudiantes'
+            $estudiante = Estudiante::create([
+                'nro_ci' => $validatedData['nro_ci'],
+                'nombre' => $validatedData['nombre'],
+                'sexo' => $validatedData['sexo'],
+                'editado' => false,
+                'inscrito' => true,
+            ]);
+
+            // Registrar la relación en 'profesor_estudiante'
+            ProfesorEstudiante::create([
+                'id_profesor' => $validatedData['id_profesor'],
+                'id_estudiante' => $estudiante->id,
+                'edicion' => $edicionActual->n_edicion,
+            ]);
+
+            // Registrar la relación en 'estudiante_escuela'
+            EstudianteEscuela::create([
+                'id_estudiante' => $estudiante->id,
+                'id_escuela' => $validatedData['id_escuela'],
+                'edicion' => $edicionActual->n_edicion,
+                'grado' => $validatedData['grado'],
+                'puntuacion' => null,
+                'medalla' => null,
+            ]);
+
+            return response()->json([
+                'message' => 'Estudiante inscrito correctamente',
+                'estudiante' => $estudiante,
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error al inscribir al estudiante',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $estudiante = Estudiante::create([
-            'nombre'=> $request -> nombre,
-            'nro_ci'=> $request -> nro_ci,
-            'grado'=> $request -> grado,
-            'genero'=> $request -> genero,
-            'puntuacion'=> $request -> puntuacion,
-            'cdgo_profesor'=> $request -> cdgo_profesor,
-            'cdgo_escuela'=> $request -> cdgo_escuela,
-        ]);
-
-        if(!$estudiante) {
-            $data = [
-                'message' => 'Error en la validacion de datos',
-                'status' => 500
-            ];
-            return response() -> json($data, 500);
-        }
-
-        $data = [
-            'estudiantes' => $estudiante,
-            'status' => 500
-        ];
-
-        return response() -> json($data, 201);
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Estudiante $estudiante)
-    {
-        //
-    }
+    
+//     public function inscribir(Request $request)  
+// {  
+//     // Validar los datos de entrada  
+//     $validatedData = $request->validate([  
+//         'nro_ci' => 'required|string|size:11|unique:estudiantes,nro_ci',  
+//         'nombre' => 'required|string|max:80',  
+//         'sexo' => 'required|in:Masculino,Femenino',  
+//         // 'id_escuela' => 'required|exists:escuelas,id',  
+//         // 'grado' => 'required|integer|min:1|max:12',  
+//     ]);  
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Estudiante $estudiante)
-    {
-        //
-    }
+//     try {  
+//         // // Obtener la edición actual abierta  
+//         // $edicionActual = Edicion::where('abierto', true)->first();  
+//         // if (!$edicionActual) {  
+//         //     return response()->json(['message' => 'No hay una edición abierta, por lo que no se puede inscribir un estudiante.'], 400);  
+//         // }  
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Estudiante $estudiante)
-    {
-        //
-    }
+//         // Crear el estudiante en la tabla 'estudiantes'  
+//         $estudiante = Estudiante::create([  
+//             'nro_ci' => $validatedData['nro_ci'],  
+//             'nombre' => $validatedData['nombre'],  
+//             'sexo' => $validatedData['sexo'],  
+//             'editado' => false,  
+//             'inscrito' => true,  
+//             // 'edicion' => $edicionActual->n_edicion,  
+//         ]);  
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Estudiante $estudiante)
-    {
-        //
-    }
+//         // Registrar la relación en 'estudiante_escuela'  
+//         // EstudianteEscuela::create([  
+//         //     'id_estudiante' => $estudiante->id,  
+//         //     'id_escuela' => $validatedData['id_escuela'],  
+//         //     'edicion' => $edicionActual->n_edicion,  
+//         //     'grado' => $validatedData['grado'],  
+//         //     'puntuacion' => null,  
+//         //     'medalla' => null,  
+//         // ]);  
+
+//         return response()->json([  
+//             'message' => 'Estudiante inscrito correctamente',  
+//             'estudiante' => $estudiante,  
+//         ], 201);  
+//     } catch (\Exception $e) {  
+//         return response()->json([  
+//             'message' => 'Error al inscribir al estudiante',  
+//             'error' => $e->getMessage(),  
+//         ], 500);  
+//     }  
+// }
 }

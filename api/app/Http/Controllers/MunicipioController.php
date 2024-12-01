@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Municipio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\MunicipioController;
 
 class MunicipioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($cdgo_provincia)
     {
         //
-        $municipios = Municipio::all();
+        $municipios = Municipio::where('cdgo_provincia', $cdgo_provincia) -> get(['codigo', 'nombre']);
 
         if ($municipios -> isEmpty()) {
             $data = [

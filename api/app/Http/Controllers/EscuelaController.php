@@ -3,74 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escuela;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\EscuelaController;
 
 class EscuelaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Función para listar escuela dado el codigo del municipio
      */
-    public function index()
+    public function index($cdgo_municipio)
     {
-        //
-        $escuelas = Escuela::all();
-
-        if ($escuelas -> isEmpty()) {
-            $data = [
+        $escuelas = Escuela::where('cdgo_municipio', $cdgo_municipio)
+            ->whereNotNull('poblado')  // Asegura que solo escuelas con 'poblado' se incluyan
+            ->get(['id', 'nombre', 'subsistema', 'poblado']);
+    
+        if ($escuelas->isEmpty()) {
+            return response()->json([
                 'message' => 'No se encontraron las escuelas',
                 'status' => 404
-            ];
-            return response() -> json($data, 404);
+            ], 404);
         }
-
-        return response() -> json($escuelas, 200);
+    
+        $escuelasFormatted = $escuelas->map(function ($escuela) {
+            return [
+                'label' => "{$escuela->nombre} / {$escuela->subsistema} / {$escuela->poblado}",
+                'value' => (string) $escuela->id  // Usamos 'id' como identificador único
+            ];
+        });
+    
+        return response()->json($escuelasFormatted, 200);
     }
+    
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Función guardar nueva escuela en la base de datos
      */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Escuela $escuela)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Escuela $escuela)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Escuela $escuela)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Escuela $escuela)
-    {
-        //
-    }
+    
 }

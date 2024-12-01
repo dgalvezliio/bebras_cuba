@@ -1,5 +1,5 @@
 .card {
-    height: rem(440px);
+    height: rem(300px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,7 +13,7 @@
     font-family:
       Greycliff CF,
       var(--mantine-font-family);
-    font-weight: 900;
+    font-weight: 700;
     color: var(--mantine-color-white);
     line-height: 1.2;
     font-size: rem(32px);

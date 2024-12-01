@@ -19,7 +19,6 @@ const links = [
     ],
 },
 { link: '/geobebras', label: 'GeoBebras' },
-// { link: '/acceso', label: 'Iniciar Sección' },
 
 ];
 
@@ -28,7 +27,7 @@ export function BarNavInicial() {
     useEffect(() => {  
             const handleScroll = () => {  
             if (window.pageYOffset >= 80) { // Cambia este valor según la altura de la imagen  
-                setIsScrolled(true);  
+                setIsScrolled(false);  
             } else {  
                 setIsScrolled(false);  
             }  
@@ -84,7 +83,7 @@ export function BarNavInicial() {
     useEffect(() => {  
         const handleScroll = () => {  
             if (window.pageYOffset > 0) {  
-            setIsScrolled(true);  
+            setIsScrolled(false);  
             } else {  
             setIsScrolled(false);  
             }  

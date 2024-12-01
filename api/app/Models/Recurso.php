@@ -12,9 +12,9 @@ class Recurso extends Model
     protected $table = 'recurso';
 
     protected $fillable = [
-        'fecha',
-        'codigo',
-        'nro_llamado',
-        'cdgo_convoc'
+        'id',
+        'nombre',
+        'descripcion',
+        'archivo_path',
     ];
 }

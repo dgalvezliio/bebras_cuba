@@ -1,6 +1,4 @@
 import {
-    Badge,
-    Group,
     Title,
     Text,
     Card,
@@ -9,27 +7,27 @@ import {
     rem,
     useMantineTheme,
 } from '@mantine/core';
-import { IconGauge, IconUser, IconCookie } from '@tabler/icons-react';
+import { IconHelpOctagon, IconCalendarMonth, IconClipboardList } from '@tabler/icons-react';
 import classes from '../styles/FeaturesCards.module.css';
 
 const mockdata = [
     {
     title: '¿Que es Bebras?',
     description:
-        'This dust is actually a powerful poison that will even make a pro wrestler sick, Regice cloaks itself with frigid air of -328 degrees Fahrenheit',
-    icon: IconGauge,
+        'Es un concurso internacional que tiene como objetivo promover el pensamiento computacional. ',
+    icon: IconHelpOctagon,
     },
     {
     title: 'Eventos',
     description:
-        'People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma',
-    icon: IconUser,
+        'Los eventos se realizan en los meses de noviembre y diciembre, incluyendo las incripciones y convocatorias.',
+    icon: IconClipboardList,
     },
     {
-    title: 'Fechas',
+    title: 'Fecha',
     description:
-        'They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves',
-    icon: IconCookie,
+        'La fecha de inicio para esta edicion va ser el dia 4 de diciembre de 2024',
+    icon: IconCalendarMonth,
     },
 ];
 
@@ -42,10 +40,10 @@ export function FeaturesCards() {
         stroke={2}
         color={theme.colors.blue[6]}
         />
-        <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+        <Text fz="h3" fw={700} className={classes.cardTitle} mt="md">
         {feature.title}
         </Text>
-        <Text fz="sm" c="dimmed" mt="sm">
+        <Text fz="lg" c="dimmed" mt="sm">
         {feature.description}
         </Text>
     </Card>
@@ -53,19 +51,13 @@ export function FeaturesCards() {
 
     return (
     <Container size="lg" py="xl">
-        <Group justify="center">
-        <Badge variant="filled" size="lg">
-            Best company ever
-        </Badge>
-        </Group>
-
+        
         <Title order={2} className={classes.title} ta="center" mt="sm">
-        Integrate effortlessly with any technology stack
+            Sobre Bebras
         </Title>
 
         <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-        hunger drives it to try biting a Steel-type Pokémon.
+            En esta parte se comenta de manera resumida que es Bebras, como funciona, los eventos y fecha del concurso.
         </Text>
 
         <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>

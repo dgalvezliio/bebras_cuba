@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('estudiante', function (Blueprint $table) { 
-            $table->id();
-            $table->string('nro_ci');  
-            $table->string('nombre');  
-            $table->string('grado');  
-            $table->string('genero');  
-            $table->string('puntuacion');  
-            $table->string('cdgo_profesor');  
-            $table->string('cdgo_escuela');  
+        Schema::create('resultados', function (Blueprint $table) {  
+            $table->id(); 
+            $table->String('provincias'); 
+            $table->integer('SuperPeques'); 
+            $table->integer('Peques'); 
+            $table->integer('Benjamin'); 
+            $table->integer('Cadete'); 
+            $table->integer('Junior'); 
+            $table->integer('Senior'); 
             $table->timestamps();  
-        });
+        });  
     }
 
     /**

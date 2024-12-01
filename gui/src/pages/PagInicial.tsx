@@ -2,7 +2,10 @@ import '@mantine/core/styles.css';
 import { MantineProvider, Container, Card, Table, Title } from '@mantine/core';
 import { HeroBullets } from '../components/HeroBullets';
 import { FeaturesCards } from '../components/FeaturesCards';
-import { FeaturesGrid } from '../components/FeaturesGrid';
+import classe from '../styles/FeaturesGrid.module.css';
+import { FeaturesAsymmetrical } from '../components/FeaturesAsymmetrical';
+import { HeroImageRight } from '../components/HeroImageRight';
+import { HeroContentLeft } from '../components/HeroContentLeft';
 
 const elements = [
     { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
@@ -55,14 +58,16 @@ export default function PagInicial() {
     return (
         
         <MantineProvider>
-        
-            <HeroBullets></HeroBullets>
-            <FeaturesCards></FeaturesCards>
-            <FeaturesGrid></FeaturesGrid>
-            
+            {/* <HeroBullets></HeroBullets> */}
+            <HeroContentLeft  />
+            {/* <HeroImageRight /> */}
+            <FeaturesCards />
+            <FeaturesAsymmetrical />
             <Container size="lg">
-                <Card withBorder shadow="sm" radius="md">
-                    <Title order={3} mb={5}> Resultados de la última edición </Title>
+            <Title className={classe.title}>Resultados de la última edición</Title>
+
+                <Card withBorder shadow="sm" radius="md" mb={40}>
+                    <Title order={4} mb={5}> Tabla de resultados de las provincias por categoria  </Title>
                     
                     <Table captionSide="bottom">
                         <Table.Caption>Some elements from periodic table</Table.Caption>
@@ -72,6 +77,7 @@ export default function PagInicial() {
                     </Table>
                 </Card>
             </Container>
+            
 
         </MantineProvider>
     );

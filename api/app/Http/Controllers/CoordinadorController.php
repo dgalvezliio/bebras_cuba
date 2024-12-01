@@ -3,26 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Resultado;
 
-class ResultadoController extends Controller
+class CoordinadorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $resultados = Resultado::all();
+    public function activarProfesor(Request $request, $profesorId)  
+    {  
+        // Verificar que el usuario actual sea el coordinador nacional  
+        if (auth()->user()->es_coordinador_nacional) {  
+            $profesor = Profesor::findOrFail($profesorId);  
+            $profesor->esta_activo = !$profesor->esta_activo;  
+            $profesor->save();  
 
-        if ($resultados->isEmpty()) {
-            $data = [
-                'message' => 'No se encontraron los resultados',
-                'status' => 404
-            ];
-            return response() -> json($data, 404);
-        }
-        return response() ->json($resultados, 200);
+            return response()->json(['message' => 'Estado del profesor actualizado'], 200);  
+        } else {  
+            return response()->json(['error' => 'No tienes permiso para realizar esta acción'], 403);  
+        }  
     }
 
     /**
