@@ -1,5 +1,5 @@
 import '@mantine/core/styles.css';
-import { MantineProvider, Title } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { EditarCuenta } from '../components/EditarCuenta';
 
 

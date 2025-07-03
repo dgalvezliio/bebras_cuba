@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('grado_superior');  
             $table->integer('edad_inferior');  
             $table->integer('edad_superior'); 
-            // Llaves foraneas
-            $table->foreignId('id_estudiante')->references('id')->on('estudiantes')->onDelete('cascade'); // Relación con el estudiante
             $table->timestamps();  
         });  
     }

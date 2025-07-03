@@ -35,11 +35,12 @@
 
 .user {
     color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-xs);
     border-radius: var(--mantine-radius-sm);
     transition: background-color 100ms ease;
 
     &:hover {
+    /* padding: var(--mantine-spacing-xs) var(--mantine-spacing-xs);     */
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
     }
 
@@ -52,9 +53,6 @@
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
 }
 
-.header {  
-  transition: position 0.3s ease-in-out;  
-}  
 
 
 

@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('municipios', function (Blueprint $table) {
             $table->id();  // Campo autoincremental
             $table->integer('codigo')->unique();  // Campo único
-            $table->string('nombre', 30); // Nombre de municipio con tamñano de 50 caracteres
-            $table->integer('cdgo_provincia'); // Nombre de municipio con tamñano de 50 caracteres
+            $table->string('nombre', 30); // Nombre de municipio con tamñano de 30 caracteres
+            $table->integer('cdgo_provincia'); 
             // Llave foranea
             $table->foreign('cdgo_provincia')->references('codigo')->on('provincias')->onDelete('cascade');  // Llave foránea a la tabla de provincias
             $table->timestamps();

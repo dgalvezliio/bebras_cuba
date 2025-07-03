@@ -8,9 +8,11 @@ export function GeoPortal() {
 
             <AspectRatio ratio={16 / 9}>
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.3063874233135!2d-74.04668908358428!3d40.68924937933441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty%20National%20Monument!5e0!3m2!1sen!2sru!4v1644262070010!5m2!1sen!2sru"
-                    title="Google map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.930634062341!2d-77.850485!3d18.4658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edb8b7e8a9d3b3f%3A0x9c7b9d1b1c9d9b1c!2sUniversidad%20Central%20Marta%20Abreu%20de%20Las%20Villas!5e0!3m2!1sen!2scu!4v1644262070010!5m2!1sen!2scu"
+                    title="Mapa de Cuba - Universidad Central de Las Villas"
                     style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
                 />
             </AspectRatio>
         </Container>

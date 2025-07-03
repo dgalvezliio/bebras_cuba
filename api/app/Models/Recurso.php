@@ -9,10 +9,11 @@ class Recurso extends Model
 {
     use HasFactory;
 
-    protected $table = 'recurso';
+    protected $table = 'recursos';
 
     protected $fillable = [
         'id',
+        'edicion',
         'nombre',
         'descripcion',
         'archivo_path',

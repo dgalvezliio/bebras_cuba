@@ -17,12 +17,12 @@ return new class extends Migration
             $table->integer('n_edicion'); // Número de la edicion 
             $table->year('a_edicion'); // El año de la edición 
             $table->date('fecha_convocatoria')->nullable();
-		 $table->date('fecha_inic_preinscrip')->nullable();
+		    $table->date('fecha_inic_preinscrip')->nullable();
             $table->date('fecha_fin_preinscrip')->nullable();
-		 $table->date('fecha_inic_inscripVille')->nullable();
+		    $table->date('fecha_inic_inscripVille')->nullable();
             $table->date('fecha_inic_realiz')->nullable();
             $table->date('fecha_fin_realiz')->nullable();
-		 $table->date('fecha_resultados')->nullable();
+		    $table->date('fecha_resultados')->nullable();
             $table->boolean('abierto')->default(false); 
             $table->timestamps();
         });

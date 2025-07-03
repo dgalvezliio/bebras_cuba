@@ -30,6 +30,4 @@ class ProvinciaController extends Controller
             return response()->json($data, 404);  
         }  
     }
-
-    
 }

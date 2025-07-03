@@ -7,3 +7,9 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['web'])->group(function () {
+    Route::get('/sanctum/csrf-cookie', function () {
+        return response()->noContent();
+    });
+});

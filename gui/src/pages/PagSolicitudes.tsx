@@ -1,8 +1,7 @@
 import '@mantine/core/styles.css';
-import { MantineProvider, Title } from '@mantine/core';
-import { TablaDeSolicitudes } from '../components/TablaDeSolicitudes';
+import { MantineProvider } from '@mantine/core';
 import { SolitudesACoordNac } from '../components/SolicitdesACoordNac';
-import { MiPerfil } from '../components/MiPerfil';
+
 
 
 export default function PagSolicitudes() {

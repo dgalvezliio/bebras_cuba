@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('puntuacion')->nullable(); // Puntuación obtenido en el concurso 
             $table->string('medalla', 15)->nullable(); // Tipo de medalla o reconocimiento
             // Llaves foraneas
-            $table->foreign('edicion')->references('n_edicion')->on('ediciones')->onDelete('cascade');
+            $table->foreign('edicion')->references('id')->on('ediciones')->onDelete('cascade');
             $table->foreignId('id_estudiante')->references('id')->on('estudiantes')->onDelete('cascade');
             $table->foreignId('id_escuela')->references('id')->on('escuelas')->onDelete('cascade');
             $table->timestamps();

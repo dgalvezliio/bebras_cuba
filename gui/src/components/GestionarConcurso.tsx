@@ -1,113 +1,152 @@
-import { Container, Title, Button, Group, rem, Grid, Text, Radio, Card, FileInputProps, Pill, FileInput, Table, Checkbox, ActionIcon, MultiSelect, Input, Flex, NumberInput, Select} from '@mantine/core';
+import { Container, Title, Button, Group, rem, Grid, Text, Card, Select, Badge} from '@mantine/core';
 import { Fieldset } from '@mantine/core';
-import { IconUpload, IconPencil, IconTrash, IconTableFilled, IconCalendarMonth, IconCalendarEvent, IconComponents, IconCaretDownFilled } from '@tabler/icons-react';
+import { IconCalendarMonth, IconCaretDownFilled, IconCheck, IconX } from '@tabler/icons-react';
 import classes from '../styles/FeaturesCards.module.css';
-import { DateInput, DatePickerInput, YearPickerInput } from '@mantine/dates';
+import { DateInput, DatePickerInput } from '@mantine/dates';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useForm } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 axios.defaults.baseURL = 'http://localhost:8000'; // <--- Ajusta según tu configuración
 
-const elements = [
-    { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
-    { position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen' },
-    { position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium' },
-    { position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-];
+dayjs.extend(customParseFormat);
 
 export function GestionarConcurso() {
-    const [fecha_i, setFechaI] = useState<[Date | null, Date | null]>([null, null]);
-    const [fecha_r, setFechaR] = useState<[Date | null, Date | null]>([null, null]);
-    const [fecha, setFecha] = useState<Date | null>(null);
-    const [nombre, setNombre] = useState('');  
-    const [descripcion, setDescripcion] = useState('');  
-    const [archivo, setArchivo] = useState<File | null>(null);  
-    const [selectedRows, setSelectedRows] = useState<number[]>([]);
-    const [a, setA] = useState<Date | null>(null); // Año de la edición 
-    const [nroEdicion, setNroEdicion] = useState('');
-    const handleSubmit = async () => {  
-        if (!archivo) {  
-        alert('Por favor, selecciona un archivo.');  
-        return;  
-        }  
-
-        const formData = new FormData();  
-        formData.append('nombre', nombre);  
-        formData.append('descripcion', descripcion);  
-        formData.append('archivo', archivo);  
-
-        try {  
-        const response = await axios.post('/api/recursos', formData, {  
-            headers: {  
-            'Content-Type': 'multipart/form-data',  
-            },  
-        });  
-        console.log(response.data);  
-        alert('Archivo subido exitosamente');  
-        } catch (error) {  
-        console.error(error);  
-        alert('Error al subir el archivo');  
-        }  
-    };  
-
-    const ValueComponent: FileInputProps['valueComponent'] = ({ value }) => {
-        if (value === null) {
-        return null;
-        }
+    const [statusMessage, setStatusMessage] = useState('');
+    const [error, setError] = useState<String | null>('');
+    const [loading, setLoading] = useState(false);
+    const [cargar, setCargar] = useState(false);
+    const [estadoActual, setEstadoActual] = useState<string>("Cerrado"); // Inicialmente cerrado
+    const [numeroEdicion, setNumeroEdicion] = useState<number>(0);
+    // 
+    const handleStatusChange = async (value: string | null) => {
+        if (value === null) return;
     
-        if (Array.isArray(value)) {
-        return (
-            <Pill.Group>
-            {value.map((file, index) => (
-                <Pill key={index}>{file.name}</Pill>
-            ))}
-            </Pill.Group>
-        );
-        }
-    
-        return <Pill>{value.name}</Pill>;
-    };
-
-    const rows = elements.map((element) => (
-        <Table.Tr
-            key={element.name}
-            bg={selectedRows.includes(element.position) ? 'var(--mantine-color-blue-light)' : undefined}
-        >
-        <Table.Td>
-            <Checkbox
-            aria-label="Select row"
-            checked={selectedRows.includes(element.position)}
-            onChange={(event) =>
-                setSelectedRows(
-                event.currentTarget.checked
-                    ? [...selectedRows, element.position]
-                    : selectedRows.filter((position) => position !== element.position)
-                )
+        try {
+            setEstadoActual(value); // Actualiza el estado visual ("Abierto" o "Cerrado")
+            
+            const response = value === 'Abierto'
+                ? await axios.post('api/ediciones/abrir')
+                : await axios.post('api/ediciones/cerrar');
+            fetchNumeroEdicion();
+            setStatusMessage(response.data.message);
+        } catch (error) {
+            // Si hay error, revertir el estado visual
+            setEstadoActual(prev => prev === "Abierto" ? "Cerrado" : "Abierto");
+            
+            if (axios.isAxiosError(error)) {
+                setStatusMessage(error.response?.data?.message || 'Error al cambiar el estado');
+            } else {
+                setStatusMessage('Error desconocido');
             }
-        />
-        </Table.Td>
-        <Table.Td>{element.position}</Table.Td>
-        <Table.Td>{element.name}</Table.Td>
-        <Table.Td>{element.symbol}</Table.Td>
-        <Table.Td>{element.mass}</Table.Td>
-        <Table.Td>
-            <Group gap={0} justify="flex-end">
-            <ActionIcon variant="subtle" color="gray">
-                <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            </ActionIcon>
-            <ActionIcon variant="subtle" color="red">
-                <IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            </ActionIcon>
-            </Group>
-        </Table.Td>
-        </Table.Tr>
-    ));
+        }
+    };
+    const fetchNumeroEdicion = async () => {
+        try {
+            const response = await axios.get('api/nro_edicion'); // Asegúrate de que la ruta coincida con tu backend
+            setNumeroEdicion(response.data.n_edicion);
+        } catch (error) {
+            console.error("Error al obtener el número de edición:", error);
+            setNumeroEdicion(0); // Valor por defecto si falla
+        }
+    };
+    const fetchEstadoInicial = async () => {
+        const response = await axios.get('api/is-open');
+        setEstadoActual(response.data.is_open ? 'Abierto' : 'Cerrado');
+    };
+    useEffect(() => {
+        fetchEstadoInicial();
+        fetchNumeroEdicion();
+    }, []);
+    // Método para marcar fechas importantes 
+    const handleEditionDate =  async() => {
+        setLoading(true); // Iniciar el estado de carga
+        setError(null);
+        if(!formE.isValid) return;
+        try {
+            // Realiza la solicitud PUT para actualizar las fechas
+            const response = await axios.put("api/actualizar-fecha", {
+                fecha_convocatoria: dayjs(formE.values.fecha_conv).add(1, 'day').format('YYYY-MM-DD'),
+                fecha_inic_preinscrip: dayjs(formE.values.periodo_insc[0]).add(1, 'day').format('YYYY-MM-DD'),
+                fecha_fin_preinscrip: dayjs(formE.values.periodo_insc[1]).add(1, 'day').format('YYYY-MM-DD'),
+                fecha_inic_inscripVille: dayjs(formE.values.fecha_insc_ville).add(1, 'day').format('YYYY-MM-DD'),
+            });
+            setStatusMessage(response.data.message);
+            
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if(error.response?.status === 422){
+                    const errors = error.response.data.errors;
+                    const errorMessage = Object.values(errors).flat().join(', ');
+                    setError(errorMessage);
+                }
+                else {
+                    const errorMessage = error.response?.data?.message || 'Error al iniciar sesión';
+                    setError(errorMessage);
+                }
+            } else {
+                setError('Error inesperado. Por favor, inténtalo de nuevo.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    }
+    // Método para marcar fechas de convocatorias 
+    const handleConvocatoria =  async() => {
+        setCargar(true); // Iniciar el estado de carga
+        setError(null);
+        if(!formC.isValid) return;
+
+        try {
+            const response = await axios.put("api/actualizar-fecha-import", {
+                fecha_resultados: dayjs(formC.values.fecha_result).add(1, 'day').format('YYYY-MM-DD'),
+                fecha_inic_realiz: dayjs(formC.values.fecha_realz_concurs[0]).add(1, 'day').format('YYYY-MM-DD'),
+                fecha_fin_realiz: dayjs(formC.values.fecha_realz_concurs[1]).add(1, 'day').format('YYYY-MM-DD'),
+            });
+            setStatusMessage(response.data.message); 
+            setError("Fechas fueron publicadas");
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if(error.response?.status === 422){
+                    const errors = error.response.data.errors;
+                    const errorMessage = Object.values(errors).flat().join(', ');
+                    setError(errorMessage);
+                }
+                else {
+                    const errorMessage = error.response?.data?.message || 'Error al iniciar sesión';
+                    setError(errorMessage);
+                }
+            } else {
+                setError('Error inesperado. Por favor, inténtalo de nuevo.');
+            }
+        } finally {
+            setCargar(false);
+        }
+    }
+    // Validación para la fechas importantes 
+    const formE = useForm({
+        initialValues: { fecha_conv: '', fecha_insc_ville: '', periodo_insc: [] },
+        validate: {
+            fecha_conv: (value) => (!value ? 'Debes marcar la fecha de convocatoria' : null),
+            fecha_insc_ville: (value) => (!value ? 'Debes marcar la fecha de inscripción' : null),
+            periodo_insc: (value) => (value.length === 0 ? 'Debes marcar el periodo de inscripción' : null),
+        }
+    });
+    // Validación para las fechas de las convocatorias 
+    const formC  = useForm({
+        initialValues: { fecha_result: '', fecha_realz_concurs: [] },
+        validate: {
+            fecha_result: (value) => (!value ? 'Debes marcar la fecha de resultados' : null),
+            fecha_realz_concurs: (value) => (value.length === 0 ? 'Debes marchar la fecha del concurso' : null),
+        }
+    });
     const icon = <IconCaretDownFilled style={{ width: rem(16), height: rem(16) }} />;
     return (
         <Container size='lg' mt={40}>
             <Title order={2} className={classes.title} ta="center" mb='sm'>
-                Gestionar el Concurso
+                Gestionar la edición
             </Title>
             <Fieldset mt={20} legend="Administrar Edición">
                 <Grid>
@@ -119,93 +158,93 @@ export function GestionarConcurso() {
                             target="_blank"
                             withBorder
                         >
-                            <Title order={3}> Edición de BebrasCuba </Title>
-                            <Text c={'gray'} mb={10}>Planifique la edición</Text>
-                            <Grid>
-                                <Grid.Col span={5}>
-                                    <NumberInput
-                                        label="Marque el nro de la edición"
-                                        placeholder="Input placeholder"
-                                        value={nroEdicion}
-                                        
-                                    />
-                                </Grid.Col>
-                                <Grid.Col span={4}>
-                                    <Select
-                                        data={['Abierta', 'En espera...', 'Cerrada']}
-                                        rightSectionPointerEvents="none"
-                                        rightSection={icon}
-                                        label="Estado de la edicion"
-                                        placeholder="seleccione"
-                                        clearable
-                                    />
-                                </Grid.Col>
-                                <Grid.Col span={3}>
-                                    <YearPickerInput
-                                        label="Año de edición"
-                                        placeholder="Pick date"
-                                        value={a}
-                                        onChange={setA}
-                                        clearable
-                                    />
-                                </Grid.Col>
-                            </Grid>
+                            <Title order={3}> {numeroEdicion-1}ª Edición de BebrasCuba </Title>
+                            <Text c={'gray'} mb={5} fw={300} size='sm'>Planifique la edición</Text>
                             
-                            <Group mt={10}>
-                                <Button rightSection={<IconCalendarEvent size={16} />} variant="filled">
-                                    Guardar el nro
-                                </Button>
-                                <Button rightSection={<IconCalendarEvent size={16} />} variant="filled">
-                                    Guardar el año 
-                                </Button>
-                            </Group>
                             <Grid>
                                 <Grid.Col span={8}>
-                                    <DateInput  
-                                        minDate={new Date()}  
-                                        maxDate={dayjs(new Date()).add(1, 'month').toDate()}  
-                                        label="Fecha de lanzamiento"  
-                                        description="Marque la fecha de inscripción del concurso"  
-                                        placeholder="Marque la fecha"  
-                                        clearable  
-                                        withAsterisk  
-                                    />  
-                                </Grid.Col>
-                                <Grid.Col span={4}>
-                                    <Group mt={44}>
-                                        <Button rightSection={<IconCalendarEvent size={16} />} variant="filled">
-                                            Publicar
-                                        </Button>
-                                    </Group>
-                                </Grid.Col>
-                            </Grid>
-                            
-                            <Grid>
-                                <Grid.Col span={12}>
-                                    <DatePickerInput
-                                        type="range"
-                                        minDate={new Date()}  
-                                        maxDate={dayjs(new Date()).add(1, 'month').toDate()}  
-                                        label="Periodo de Inscripción"
-                                        placeholder="Pick dates range"
-                                        description="Marque fecha para periodo de inscripción"
-                                        value={fecha_i}
-                                        onChange={setFechaI}
-                                        clearable
-                                        mt={5}
-                                    />
+                                <Group align="center" mb="sm" gap="xs">
+                                    <Text fw={500}>Estado de la edición:</Text>
+                                    <Badge
+                                        color={estadoActual === "Abierto" ? "blue" : "red"}
+                                        leftSection={estadoActual === "Abierto" ? <IconCheck size={14}  /> : <IconX size={14} />}
+                                    >
+                                        {estadoActual}
+                                    </Badge>
+                                </Group>
+                                <Select
+                                    data={[
+                                        { value: 'Abierto', label: 'Abrir edición' },
+                                        { value: 'Cerrado', label: 'Cerrar edición' }
+                                    ]}
+                                    // value={estadoActual} // Muestra "Abierto" o "Cerrado" en la interfaz
+                                    rightSectionPointerEvents="none"
+                                    rightSection={icon}
+                                    label="Cambie el estado de la edición"
+                                    description="Seleccione la opcion para Abrir o Cerrar edicion"
+                                    placeholder="Seleccione"
+                                    onChange={handleStatusChange}
+                                    error={statusMessage}
+                                />
                                 </Grid.Col>
                             </Grid>
+                            <form onSubmit={formE.onSubmit(handleEditionDate)}>
+                                <Grid mt={5}>
+                                    <Grid.Col span={6} >
+                                        <DateInput  
+                                            valueFormat="YYYY-MM-DD"
+                                            minDate={new Date()}  
+                                            maxDate={dayjs(new Date()).add(12, 'month').toDate()}  
+                                            label="Fecha de Convovatoria"  
+                                            description="Fecha de inicio de convocatoria"
+                                            placeholder="Marque la fecha"  
+                                            clearable  
+                                            withAsterisk  
+                                            {...formE.getInputProps('fecha_conv')}
+                                        />  
+                                    </Grid.Col>
+                                    <Grid.Col span={6}>
+                                        <DateInput  
+                                            valueFormat="YYYY-MM-DD"
+                                            minDate={new Date()}  
+                                            maxDate={dayjs(new Date()).add(12, 'month').toDate()}  
+                                            label="Fecha de inscripcion en Ville"
+                                            description="Fecha de inicio en ville "  
+                                            placeholder="Marque la fecha"  
+                                            clearable  
+                                            withAsterisk  
+                                            {...formE.getInputProps('fecha_insc_ville')}
+                                        />  
+                                    </Grid.Col>
+                                </Grid>
+                                <Grid>
+                                    <Grid.Col span={12}>
+                                        <DatePickerInput
+                                            type="range"
+                                            valueFormat="YYYY-MM-DD" 
+                                            minDate={new Date()}  
+                                            maxDate={dayjs(new Date()).add(12, 'month').toDate()} 
+                                            label="Periodo de Inscripción"
+                                            placeholder="Fecha de inscripción"
+                                            description="Marque fecha para periodo de inscripción"
+                                            clearable
+                                            withAsterisk
+                                            {...formE.getInputProps('periodo_insc')}
+                                            mt={5}
+                                        />
+                                    </Grid.Col>
+                                </Grid>
+                                
+                                <Group mt={10}>
+                                    <Button type='submit' loading={loading}  rightSection={<IconCalendarMonth size={16} />} variant="filled">
+                                        Publicar
+                                    </Button>
+                                </Group>
 
-                            <Group mt={10}>
-                                <Button rightSection={<IconCalendarMonth size={16} />} variant="filled">
-                                    Publicar
-                                </Button>
-                            </Group>
-                            
+                            </form>
                         </Card>
                     </Grid.Col>
-
+                    
                     <Grid.Col span={6}>
                         <Card
                             shadow="sm"
@@ -214,7 +253,6 @@ export function GestionarConcurso() {
                             target="_blank"
                             withBorder
                         >
-                        
                             <Title order={3}>Convocatoria</Title>
                             <Text fw={500} size="lg" mt="xs">
                                 Marque la fecha de las convocatorias
@@ -223,184 +261,46 @@ export function GestionarConcurso() {
                                 Fechas importantes
                             </Text>
                             {/* Fecha para realización del concurso */}
-                            <Grid>
-                                <Grid.Col span={8}>
-                                    <DatePickerInput
-                                        label="Fecha de resultado"
-                                        minDate={new Date()}  
-                                        maxDate={dayjs(new Date()).add(1, 'month').toDate()}  
-                                        placeholder="Marque la fecha"
-                                        description="Marque fecha de publicación de resultado"
-                                        value={fecha}
-                                        onChange={setFecha}
-                                        mt={20}
-                                        clearable
-                                    />
-                                </Grid.Col>
-                                <Grid.Col span={4}>
-                                    <Group mt={64}>
-                                        <Button rightSection={<IconCalendarEvent size={16} />} variant="filled">
-                                            Publicar
-                                        </Button>
-                                    </Group>
-                                </Grid.Col>
-                            </Grid>
-
-                            <DatePickerInput
-                                type="range"
-                                minDate={new Date()}  
-                                maxDate={dayjs(new Date()).add(1, 'month').toDate()}  
-                                label="Fecha para realización del concurso"
-                                description="Marque fecha de periodo de realizacion del concurso"
-                                placeholder="Marque la fecha"
-                                value={fecha_r}
-                                onChange={setFechaR}
-                                mt={10}
-                                clearable
-                            />
-                            <Group mt={10}>
-                                <Button rightSection={<IconCalendarMonth size={16} />} variant="filled">
-                                    Publicar
-                                </Button>
-                            </Group>
-                        </Card>
-                    </Grid.Col>
-                </Grid>
-
-                <Grid>
-                    <Grid.Col span={12}>
-                        <Card
-                            shadow="sm"
-                            padding="xl"
-                            component="a"
-                            target="_blank"
-                            withBorder
-                        >
-                            <Title order={3}>Recursos</Title>
-                            <Text fw={500} size="lg" mt="md">
-                                Sube archivos de apoyo al concurso
-                            </Text>
-
-                            <Grid mb={10}>
-                                <Grid.Col span={6}>
-                                    <Input.Wrapper label="Titulo del documento">
-                                        <Input 
-                                            placeholder="Digite el titulo del documento" 
-                                            value={nombre}  
-                                            onChange={(e) => setNombre(e.currentTarget.value)}  
+                            <form onSubmit={formC.onSubmit(handleConvocatoria)}>
+                                <Grid>
+                                    <Grid.Col span={8}>
+                                        <DateInput
+                                            label="Fecha de resultado"
+                                            valueFormat="YYYY-MM-DD" 
+                                            minDate={new Date()}  
+                                            maxDate={dayjs(new Date()).add(12, 'month').toDate()}  
+                                            placeholder="Marque la fecha"
+                                            description="Marque fecha de publicación de resultado"
+                                            mt={20}
+                                            clearable
+                                            {...formC.getInputProps('fecha_result')}
                                         />
-                                    </Input.Wrapper>
-                                </Grid.Col>
-                                <Grid.Col span={6}>
-                                    <Input.Wrapper label="Descripción">
-                                        <Input 
-                                            placeholder="Digite el subtitulo del documento" 
-                                            value={descripcion}  
-                                            onChange={(e) => setDescripcion(e.currentTarget.value)} 
-                                        />
-                                    </Input.Wrapper>
-                                </Grid.Col>
-                            </Grid>
-                            <Grid mb={20}>
-                                <Grid.Col span={7}>
-                                    <FileInput
-                                        withAsterisk
-                                        label="Cargue el fichero"
-                                        placeholder="Cargue el fichero aqui"
-                                        // multiple
-                                        valueComponent={ValueComponent}
-                                        onChange={(file) => setArchivo(file)}  
-                                        clearable
-                                    />
-                                </Grid.Col>
-                                <Group ml={10} mt={25} mr={10}>
-                                    <Button 
-                                        variant="light" 
-                                        rightSection={<IconUpload size={15} />}
-                                        onClick={handleSubmit}
-                                    >
-                                        Subir archivo
+                                    </Grid.Col>
+                                </Grid>
+                                <DatePickerInput
+                                    type="range"
+                                    valueFormat="YYYY-MM-DD" 
+                                    minDate={new Date()}  
+                                    maxDate={dayjs(new Date()).add(12, 'month').toDate()}  
+                                    label="Fecha para realización del concurso"
+                                    description="Marque fecha de periodo de realizacion del concurso"
+                                    placeholder="Marque la fecha"
+                                    mt={10}
+                                    clearable
+                                    {...formC.getInputProps('fecha_realz_concurs')}
+                                />
+                                <Text>{error}</Text>
+                                <Group mt={10}>
+                                    <Button type='submit' mb={27} loading={cargar} rightSection={<IconCalendarMonth size={16} />} variant="filled">
+                                        Publicar
                                     </Button>
                                 </Group>
-                                <Grid.Col span={3}>
-                                    <Group mt={25}>
-                                        <Button color='red' variant="light" rightSection={<IconTrash size={15} />}>Eliminar archivos</Button>
-                                    </Group>
-                                </Grid.Col>
-                            </Grid>
-
-                            <Table>
-                                <Table.Thead>
-                                    <Table.Tr>
-                                        <Table.Th style={{ width: rem(40) }}>
-                                        </Table.Th>
-                                        <Table.Th>Nombre</Table.Th>
-                                        <Table.Th>Element name</Table.Th>
-                                        <Table.Th>Symbol</Table.Th>
-                                        <Table.Th>Atomic mass</Table.Th>
-                                    </Table.Tr>
-                                </Table.Thead>
-                                <Table.Tbody>{rows}</Table.Tbody>
-                            </Table>
-                            
+                                
+                            </form>
                         </Card>
                     </Grid.Col>
                 </Grid>
-
-                {/*  */}
-                <Card withBorder mt={'md'}>
-                    <Title order={3}>Configurar datos para examen</Title>
-                    <Text c="dimmed" >Configure los datos según el orden de la organización internacional</Text>
-                
-                    <Grid>
-                        <Grid.Col span={5}>
-                            <MultiSelect
-                                label="Seleccione las columnas"
-                                placeholder="Seleccione las columnas a generar"
-                                data={['Nombre', 'Escuela', 'Grado']}
-                                clearable
-                            />
-                        </Grid.Col>
-
-                        <Grid.Col span={3}>
-                            <Text color='dark' fw={500} ml={30} size="sm">Agrupar por ...</Text>
-                            <Flex
-                            mih={50}
-
-                            gap="md"
-                            justify="flex-start"
-                            align="flex-start"
-                            direction="row"
-
-                            >
-                                <Checkbox ml={20} label="Categoria" mt={10} />
-                                <Checkbox label="Sexo" mt={10} />
-                                <Group mt={5} ml={20}>  
-                                    <Button  variant="filled" rightSection={<IconTableFilled size={16} />} >Generar tabla</Button>
-                                </Group>
-                            </Flex>
-                            {/* <Group>
-                            <Checkbox
-                                    label="Categoria"
-                                    mt={33}
-                                />
-                            </Group>
-                            <Group>
-                            <Checkbox
-                                    label="Sexo"
-                                    mt={33}
-                                />
-                            </Group> */}
-                        </Grid.Col>
-
-                        
-                    </Grid>
-
-                    
-                
-                </Card>
             </Fieldset>
         </Container>
     );
 }
-

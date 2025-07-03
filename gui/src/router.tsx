@@ -18,7 +18,11 @@ import PagSolicRegist from './pages/PagSolicRegist';
 import { ConfirmEmail } from './components/ConfirmEmail';
 import { RecuperarContrasenia } from './components/RecuperarContrasenia';
 import PagAdmin from './pages/PagAdmin';
-
+import { GestionarRecurso } from './components/GestionarRecurso';
+import { Configuracion } from './components/Configuracion';
+import { CambiarClave } from './components/CambiarClave';
+import { CambiarContrasenia } from './components/CambiarContrasenia';
+import PagUsuarios from './pages/PagUsuarios';
 
 export const router = createBrowserRouter([  
     {  
@@ -43,9 +47,12 @@ export const router = createBrowserRouter([
             { path: "/mi-perfil/*", element: <PagMiPerfil /> },  
             { path: "/confirmar-email", element: <ConfirmEmail /> },  
             { path: "/recuperar-senia", element: <RecuperarContrasenia /> },  
-            { path: "/gestionar_usuario", element: <RecuperarContrasenia /> },  
             { path: "/admin_concurso", element: <PagAdmin /> },
-            
+            { path: "/gestor-recurso", element: <GestionarRecurso /> },
+            { path: "/configuracion", element: <Configuracion /> },
+            { path: "/cambiar-clave", element: <CambiarClave /> },
+            { path: "/cambiar-contrasenia", element: <CambiarContrasenia /> },
+            { path: "/usuarios", element: <PagUsuarios /> },
         ],  
     },  
     

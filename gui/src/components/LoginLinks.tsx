@@ -12,102 +12,148 @@ import {
 } from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { IconMailFilled, IconLockFilled } from '@tabler/icons-react';
-import { isEmail, useForm } from '@mantine/form';
 import { useState } from 'react';
+import axios from 'axios';
+import { isEmail, useForm } from '@mantine/form';
+import { useUserContext } from '../context/UserContext';
 
-interface LoginLinksProps {
+axios.defaults.baseURL = 'http://localhost:8000'; // Ajusta según tu configuración
+axios.defaults.withCredentials = true;
 
-     setUserRole: (role: string) => void; // El tipo de setUserRole
+export function LoginLinks() {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null); // Estado para mensajes de error
+    const navigate = useNavigate();
     
-    }
-export function LoginLinks({ setUserRole }: LoginLinksProps) { // Recibe setUserRole como prop
-    const [email, setEmail] = useState(''); 
-    const [password, setPassword] = useState(''); 
-    const navigate = useNavigate(); 
-    
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => { 
-    e.preventDefault(); 
-        // Verificar las credenciales
-        if (email === 'rcabralm@uclv.edu.cu' && password === 'secret') { 
-        setUserRole('profesor'); // Cambia el rol a 'profesor'
-        alert('Usuario y contraseña correcto!');
-        navigate('/');
-            } else if (email === 'dgalves@uclv.edu.cu' && password === 'liogalves1980.*') { 
-            setUserRole('coordinador_nacional'); // Cambia el rol a 'coordinador nacional'
-            alert('Usuario y contraseña correcto!');
-            // navigate('/');
-            // links.push({ link: '/admin', label: 'Administrar' });
-        } else {  
-            alert('Usuario y contraseña incorrecto!');
-            console.error('Credenciales inválidas'); 
-        }
+    const { user, setUser } = useUserContext();
+    // Funcion para loguear en el sistema
+    const handleSubmit = async ( values: {correo: string; contrasenia: string }) => {
+        setLoading(true);
+        setError(null);
+        console.log("Datos del formulario:", values);
+        try {
+            const response = await axios.post('api/auth/login', {
+                correo: values.correo,
+                contrasenia: values.contrasenia,
+            });
+            const userData = response.data.user; // Suponiendo que el backend devuelve todos los datos del usuario
+            // Guardar los datos del usuario en el contexto
+            setUser(userData);
+            localStorage.setItem('userRole', userData.rol);
+            localStorage.setItem('userName', userData.nombre);
+            localStorage.setItem('userLastName', userData.apellidos);
+            localStorage.setItem('userEmail', userData.correo);
+            localStorage.setItem('userId', userData.id);
+            navigate('/'); // Redirigir al inicio
+            window.location.reload();  
+        } catch (error) {
+            let errorMessage = 'Error inesperado. Por favor, inténtalo de nuevo.';
+            let errorTitle = 'Error';
+            let color = 'red';
+        
+            if (axios.isAxiosError(error)) {
+              if (error.response) {
+                // Mapeo de errores específicos del backend
+                switch (error.response.status) {
+                  case 401:
+                    errorTitle = 'Credenciales inválidas';
+                    errorMessage = 'El correo o contraseña son incorrectos';
+                    break;
+                  case 403:
+                    errorTitle = 'Acceso denegado';
+                    if (error.response.data.error === 'No hay edición abierta') {
+                      errorMessage = 'No hay edición abierto, verifique la fecha de apertura en la pagina inicial.';
+                      color = 'blue';
+                    } else if (error.response.data.error === 'El profesor no está activo') {
+                      errorMessage = 'Tu cuenta aún no está activa, está en la proceso de validación.';
+                      color = 'orange';
+                    }
+                    break;
+                  case 422: 
+                    errorMessage = Object.values(error.response.data.errors).flat().join(', ');
+                    break;
+                  default:
+                    errorMessage = error.response.data.message || errorMessage;
+                }
+              }
+            }
+        
+            // // Mostrar notificación con borde
+            // notifications.show({
+            //   title: errorTitle,
+            //   message: errorMessage,
+            //   color,
+            //   icon: color === 'blue' ? <IconAlertCircle size={18} /> : <IconX size={18} />,
+            //   withBorder: true,
+            //   styles: (theme) => ({
+            //     root: {
+            //       borderWidth: 2,
+            //       borderColor: theme.colors[color][6],
+            //       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+            //     },
+            //     title: {
+            //       fontWeight: 600,
+            //     },
+            //   }),
+            // });
+        
+            setError(errorMessage);
+          } finally {
+            setLoading(false);
+          }
     };
-
-    // const form = useForm({
-    //     mode: 'uncontrolled',
-    //     initialValues: { email: 'rcabralm@uclv.edu.cu', password: 'secret',
-    //         confirmPassword: '', },
-            
-    //     // functions will be used to validate values at corresponding key
-    //     validate: {
-    //         email: isEmail('Invalid email'),
-    //         confirmPassword: (value, values) =>
-    //         value !== values.password ? 'Passwords did not match' : null,
-    //     },
-    // });
-
+    // Metodo de validacion 
+    const form = useForm({
+        initialValues: { correo: '', contrasenia: '' },
+        // Validaciones 
+        validate: {
+            correo: isEmail('Correo electrónico inválido'), 
+            contrasenia: (value) => (value.length < 3 ? 'La contraseña debe tener lo minimo 3 caracteres' : null),
+        },
+    });
     return (
-    <Container size={450} my={40}>
-        <Title ta="center" size={30}>
-        Bienvenido a BebrasCuba
-        </Title>
-        <Text c="dimmed" size="sm" ta="center" mt={5}>
-        No tienes una cuenta?{' '}
-        <Anchor size="sm" component={Link}  
-            to="/confirmar-email" >
-            Crear una cuenta
-        </Anchor>
-        </Text>
-
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            {/* <Text c={'red'} fw={500} ta="center" mb={5}>Usuario o contraseña incorrecto!</Text> */}
-            <form onSubmit={handleSubmit}>
-            
-                <TextInput 
-                    leftSection={<IconMailFilled size={16} />}
-                    label="Correo Electrónico"
-                    placeholder="Digite su correo electrónico"
-                    // key={form.key('email')}
-                    // {...form.getInputProps('email')}
-                    value={email} // Asigna el valor del estado
-                    onChange={(e) => setEmail(e.currentTarget.value)} 
-                />
-                <PasswordInput 
-                    leftSection={<IconLockFilled  size={16} />} 
-                    label="Contraseña" 
-                    placeholder="Digite su contrasña" 
-                    mt="md" 
-                    // key={form.key('confirmPassword')}
-                    // {...form.getInputProps('confirmPassword')}
-                    value={password} // Asigna el valor del estado
-                    onChange={(e) => setPassword(e.currentTarget.value)}
-                />
-                
-                <Group justify="space-between" mt="lg">
-                    <Checkbox label="Recuerdame" />
-                    <Anchor size="sm" component={Link} to="/confirmar-email">
-                        Olvidé la contraseña
-                    </Anchor>
-                </Group>
-                <Button fullWidth type="submit" mt="sm">
-                    Iniciar Sección
-                </Button>
-            </form>
-        </Paper>
-    </Container>
+        <Container size={450} my={40}>
+            <Title ta="center" size={30}>
+                Bienvenido a BebrasCuba
+            </Title>
+            <Text c="dimmed" size="sm" ta="center" mt={5}>
+                No tienes una cuenta?{' '}
+                <Anchor size="sm" component={Link} to="/confirmar-email">
+                    Crear una cuenta
+                </Anchor>
+            </Text>
+            <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+                {/* Formulario de acceso al sistema */}
+                <form onSubmit={form.onSubmit(handleSubmit)}>
+                    <TextInput 
+                        leftSection={<IconMailFilled size={16} />}
+                        label="Correo Electrónico"
+                        placeholder="Digite su correo electrónico"
+                        {...form.getInputProps('correo')}
+                    />
+                    <PasswordInput 
+                        leftSection={<IconLockFilled size={16} />} 
+                        label="Contraseña" 
+                        placeholder="Digite su contraseña" 
+                        mt="md" 
+                        {...form.getInputProps('contrasenia')}
+                    />
+                    {error && (
+                        <Text color="red" size="sm" mt="sm">
+                            {error}
+                        </Text>
+                    )}
+                    <Group justify="space-between" mt="lg">
+                        <Checkbox label="Recuerdame" />
+                        <Anchor size="sm" component={Link} to="/cambiar-clave">
+                            Olvidé la contraseña
+                        </Anchor>
+                    </Group>
+                    <Button loading={loading} fullWidth type="submit" mt="sm" disabled={loading}>
+                        Iniciar Sesión
+                    </Button>
+                </form>
+            </Paper>
+        </Container>
     );
-}
-
-function setUserRole(arg0: string) {
-    throw new Error('Function not implemented.');
 }

@@ -43,6 +43,4 @@ class EscuelaController extends Controller
     {
         //
     }
-
-    
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id(); 
             $table->integer('edicion'); 
             // Llaves foraneas
-            $table->foreign('edicion')->references('n_edicion')->on('ediciones')->onDelete('cascade');
+            $table->foreign('edicion')->references('id')->on('ediciones')->onDelete('cascade');
             $table->foreignId('id_categoria')->references('id')->on('categorias')->onDelete('cascade'); // Relación con el estudiante
             $table->timestamps();  
         });  

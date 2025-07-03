@@ -1,4 +1,4 @@
-import { Avatar, Table, Group, Text, ActionIcon, Menu, rem } from '@mantine/core';
+import { Avatar, Table, Group, Text, ActionIcon, Menu, rem, Container, Fieldset } from '@mantine/core';
 import {
     IconPencil,
     IconMessages,
@@ -129,10 +129,20 @@ import {
     ));
 
     return (
-        <Table.ScrollContainer minWidth={800}>
-        <Table verticalSpacing="md" highlightOnHover>
-            <Table.Tbody>{rows}</Table.Tbody>
-        </Table>
-        </Table.ScrollContainer>
+        <Container size='lg' mt={50}>
+            <Fieldset legend="Tabla de profesores registrados en esta edicion">
+                <Table.ScrollContainer minWidth={800}>
+                <Table verticalSpacing="md" highlightOnHover>
+                    <Table.Thead>
+                        <Table.Th>Name</Table.Th>
+                        <Table.Th>Email</Table.Th>
+                        <Table.Th>Rate</Table.Th>
+                        {/* <Table.Th>Option</Table.Th> */}
+                    </Table.Thead>
+                    <Table.Tbody>{rows}</Table.Tbody>
+                </Table>
+                </Table.ScrollContainer>
+            </Fieldset>
+        </Container>
     );
 }

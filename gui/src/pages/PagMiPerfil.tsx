@@ -11,11 +11,11 @@ export default function PagMiPerfil() {
     return (
         <MantineProvider>
             <Routes>  
-            <Route path="/" element={<MiPerfil />} />  
-            <Route path="/coordinador-provincial" element={<CuentaCoordProvinc />} />  
-            <Route path="/coordinador-municipal" element={<CuentaCoordMunic />} />  
-            <Route path="/profesor" element={<CuentaProfesor />} />  
-            <Route path="/editar-cuenta" element={<EditarCuenta />} />  
+                <Route path="/" element={<MiPerfil />} />  
+                <Route path="/coordinador-provincial" element={<CuentaCoordProvinc />} />  
+                <Route path="/coordinador-municipal" element={<CuentaCoordMunic />} />  
+                <Route path="/profesor" element={<CuentaProfesor />} />  
+                <Route path="/editar-cuenta" element={<EditarCuenta />} />  
             </Routes>  
         </MantineProvider>
     );

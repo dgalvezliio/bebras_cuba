@@ -1,41 +1,62 @@
 import '@mantine/core/styles.css';
 import { MantineProvider, Container, Card, Table, Title } from '@mantine/core';
-import { HeroBullets } from '../components/HeroBullets';
-import { FeaturesCards } from '../components/FeaturesCards';
-import classe from '../styles/FeaturesGrid.module.css';
-import { FeaturesAsymmetrical } from '../components/FeaturesAsymmetrical';
-import { HeroImageRight } from '../components/HeroImageRight';
 import { HeroContentLeft } from '../components/HeroContentLeft';
+import { FeaturesCards } from '../components/FeaturesCards';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { FeaturesAsymmetrical } from '../components/FeaturesAsymmetrical';
+import { FeaturesGrid } from '../components/FeaturesGrid';
+import { FeaturesTitle } from '../components/FeaturesTitle';
 
-const elements = [
-    { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
-    { position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen' },
-    { position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium' },
-    { position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-    { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-];
+axios.defaults.baseURL = 'http://localhost:8000'; // <--- Ajusta según tu configuración
+interface ResultadosProvincia {  
+    provincia: string;  
+    superpegues: number;  
+    peque: number;  
+    benjamin: number;  
+    cadete: number;  
+    junior: number;  
+    senior: number;  
+    total: number;  
+}
 
-export default function PagInicial() {
-
-    const rows = elements.map((element) => (
-        <Table.Tr key={element.position}>
-            <Table.Td>{element.name}</Table.Td>
-            <Table.Td>{element.position}</Table.Td>
-            <Table.Td>{element.position}</Table.Td>
-            <Table.Td>{element.position}</Table.Td>
-            <Table.Td>{element.position}</Table.Td>
-            <Table.Td>{element.position}</Table.Td>
-        </Table.Tr>
+export default function PagInicial() { 
+    const [resultsData, setResultsData] = useState<ResultadosProvincia[]>([]); 
+    const [totalPorCategoria, setTotalPorCategoria] = React.useState<any>({});  
+    // 
+    React.useEffect(() => {  
+        const fetchData = async () => {  
+            try {  
+                const response = await axios.get('/api/resultados');  
+                setResultsData(response.data);  
+                // Obtener los totales por categoría  
+                const totalResponse = await axios.get('/api/total-categorias');  
+                setTotalPorCategoria(totalResponse.data);  
+            } catch (error) {  
+                console.error('Error fetching data:', error);  
+            }  
+        };  
+        fetchData();  
+    }, []);    
+    // Los resultados del concurso categoria y provincia
+    const rows = resultsData.map((element) => (  
+        <Table.Tr key={element.provincia}>  
+            <Table.Td>{element.provincia}</Table.Td>  
+            <Table.Td>{element.superpegues}</Table.Td>  
+            <Table.Td>{element.peque}</Table.Td>  
+            <Table.Td>{element.benjamin}</Table.Td>  
+            <Table.Td>{element.cadete}</Table.Td>  
+            <Table.Td>{element.junior}</Table.Td>  
+            <Table.Td>{element.senior}</Table.Td>  
+            <Table.Td>{element.total}</Table.Td>  
+        </Table.Tr>  
     ));
-
-    const ths = (
-        <Table.Tr>
-        <Table.Th>Provincia</Table.Th>
+    // El encabezado de la tabla
+    const ths =  (
+        <Table.Tr  >
+        <Table.Th>Provincias</Table.Th>
+        <Table.Th>SuperPeque</Table.Th>
+        <Table.Th>Peque</Table.Th>
         <Table.Th>Benjamín</Table.Th>
         <Table.Th>Cadete</Table.Th>
         <Table.Th>Junior</Table.Th>
@@ -43,42 +64,44 @@ export default function PagInicial() {
         <Table.Th>Total por Provincia</Table.Th>
         </Table.Tr>
     );
+    // Resultado total por categoria 
+    const totalRow = (  
+        <Table.Tr>  
+            <Table.Th>Total</Table.Th>  
+            <Table.Th>{totalPorCategoria.superpegues}</Table.Th>  
+            <Table.Th>{totalPorCategoria.peques}</Table.Th>  
+            <Table.Th>{totalPorCategoria.benjamin}</Table.Th>  
+            <Table.Th>{totalPorCategoria.cadete}</Table.Th>  
+            <Table.Th>{totalPorCategoria.junior}</Table.Th>  
+            <Table.Th>{totalPorCategoria.senior}</Table.Th>  
+            <Table.Th>{totalPorCategoria.total}</Table.Th>  
+        </Table.Tr>  
+    );  
 
-    const rst = (
-        <Table.Tr>
-        <Table.Th>Total</Table.Th>
-        <Table.Th>73</Table.Th>
-        <Table.Th>33</Table.Th>
-        <Table.Th>92</Table.Th>
-        <Table.Th>128</Table.Th>
-        <Table.Th>326</Table.Th>
-        </Table.Tr>
-    );
-
+    
     return (
-        
         <MantineProvider>
-            {/* <HeroBullets></HeroBullets> */}
+            {/* <HeroBullets /> */}
             <HeroContentLeft  />
             {/* <HeroImageRight /> */}
             <FeaturesCards />
+            <FeaturesTitle />
             <FeaturesAsymmetrical />
+            <FeaturesGrid />
             <Container size="lg">
-            <Title className={classe.title}>Resultados de la última edición</Title>
-
+                <Title order={1} ta={"center"} mb={30}>Resultados de la última edición</Title>
                 <Card withBorder shadow="sm" radius="md" mb={40}>
                     <Title order={4} mb={5}> Tabla de resultados de las provincias por categoria  </Title>
-                    
-                    <Table captionSide="bottom">
-                        <Table.Caption>Some elements from periodic table</Table.Caption>
-                        <Table.Thead>{ths}</Table.Thead>
-                        <Table.Tbody>{rows}</Table.Tbody>
-                        <Table.Tfoot>{rst}</Table.Tfoot>
-                    </Table>
+                    <Table.ScrollContainer minWidth={800} type="native">
+                        <Table verticalSpacing="sm" >
+                            <Table.Caption>Resultados total por categoria</Table.Caption>
+                            <Table.Thead>{ths}</Table.Thead>
+                            <Table.Tbody>{rows}</Table.Tbody>
+                            <Table.Tfoot>{totalRow}</Table.Tfoot>
+                        </Table>
+                    </Table.ScrollContainer>
                 </Card>
             </Container>
-            
-
         </MantineProvider>
     );
 }

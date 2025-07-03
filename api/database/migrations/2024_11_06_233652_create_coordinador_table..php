@@ -13,16 +13,15 @@ return new class extends Migration
     {   
         // Tabla de migración para coordinadores 
         Schema::create('coordinadores', function (Blueprint $table) {
-            $table->id(); // 
-            $table->foreignId('id_profesor')->references('id')->on('profesores')->onDelete('cascade'); // Relación con el profesor
-            $table->string('categoria', 50); // Tipo de medalla o reconocimiento
+            $table->id(); // id auto-incremental
             $table->integer('edicion');
+            $table->string('ci',11);
             // Llave foranea
-            $table->foreign('edicion')->references('n_edicion')->on('ediciones')->onDelete('cascade');
+            $table->foreign('ci')->references('nro_ci')->on('profesores')->onDelete('cascade'); // Relación con el profesor
+            $table->foreign('edicion')->references('id')->on('ediciones')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

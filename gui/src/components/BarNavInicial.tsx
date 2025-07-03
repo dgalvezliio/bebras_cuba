@@ -1,15 +1,18 @@
-import { Menu, Group, Center, Burger, Container, rem, Button } from '@mantine/core';
+import { Menu, Group, Center, Burger, Container, rem, Button, Avatar, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown, IconUsersGroup, IconUser, IconLogin2 } from '@tabler/icons-react';
+import { IconChevronDown, IconUsersGroup, IconUser, IconLogin2, IconStar } from '@tabler/icons-react';
 import {  } from '@tabler/icons-react';
 import classes from '../styles/BarNavInicial.module.css';
 import { IconBrandMantine } from '@tabler/icons-react';
 import { Link, NavLink } from 'react-router-dom';
 import { ActionToggle } from './ActionToggle';
-import { useState, useEffect } from 'react';  
+import { useState, useEffect } from 'react'; 
+import axios from 'axios'; 
+axios.defaults.baseURL = 'http://localhost:8000'; // <--- Ajusta según tu configuración
+
 const links = [
 { link: '/', label: 'Inicio' },
-{ link: '/recurso', label: 'Recurso' },
+{ link: '/recurso', label: 'Recursos' },
 {
     link: '#1', 
     label: 'Solicitar Registro',
@@ -23,8 +26,24 @@ const links = [
 ];
 
 export function BarNavInicial() {
+    const [isEditionOpen, setIsEditionOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);  
+    const [opened, { toggle }] = useDisclosure(false);
     
     useEffect(() => {  
+
+        const checkEditionState = async () => {
+            try {
+                const response = await axios.get('api/edicion/esta-abierta');
+                setIsEditionOpen(response.data.is_open);
+                console.log(response.data.is_open);
+            } catch (error) {
+                console.error("Error al verificar el estado de la edición:", error);
+                // console.log(Response.data.is_open);
+            }
+        }
+        checkEditionState();
+
             const handleScroll = () => {  
             if (window.pageYOffset >= 80) { // Cambia este valor según la altura de la imagen  
                 setIsScrolled(false);  
@@ -45,7 +64,7 @@ export function BarNavInicial() {
             {item.label}  
         </Menu.Item>  
         ));  
-
+        
         if (menuItems) {  
         return (  
             <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>  
@@ -62,7 +81,12 @@ export function BarNavInicial() {
             <Menu.Item disabled leftSection={<IconUsersGroup style={{ width: rem(14), height: rem(14) }} />}>
                 Colaborador  
             </Menu.Item>
-            <Menu.Item style={{marginRight: rem(50)}} leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />} component={Link} to="/registro">
+            <Menu.Item 
+            style={{marginRight: rem(50)}}
+            leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
+            component={Link} to="/registro"
+            disabled={!isEditionOpen}
+            >
                 Profesor   
             </Menu.Item>
             </Menu.Dropdown>
@@ -76,9 +100,6 @@ export function BarNavInicial() {
         </NavLink>  
         );  
     });
-
-    const [isScrolled, setIsScrolled] = useState(false);  
-    const [opened, { toggle }] = useDisclosure(false);  
     
     useEffect(() => {  
         const handleScroll = () => {  
@@ -102,15 +123,15 @@ export function BarNavInicial() {
             <Container size="lg">
                 
                 <div className={classes.inner}>
-                <IconBrandMantine
+                {/* <IconBrandMantine
                     style={{ width: rem(50), height: rem(50) }}
                     stroke={1.5}
                     color="var(--mantine-color-blue-filled)"
-                />
+                /> */}
+                <Title order={4} c={''}>BEBRAS<IconStar color='blue' size={20} />CUBA</Title>
                 <Group gap={5} visibleFrom="sm">
                     {items}
                 </Group>
-                
                 <Group justify="center">
                     <ActionToggle />
                     <Button radius={6} rightSection={<IconLogin2 size={16} />} size='sm' variant='outline' component={Link} to="/acceso" >Iniciar Sesión</Button>

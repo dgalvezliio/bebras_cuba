@@ -16,6 +16,4 @@ class ProfesorEstudiante extends Model
         'id_profesor',
         'id_estudiante',
     ];
-
-    
 }

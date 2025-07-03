@@ -14,10 +14,13 @@ class Edicion extends Model
     protected $fillable = [
         'n_edicion',
         'a_edicion',
-        'fecha_inic_inscrip',
-        'fecha_fin_inscrip',
+        'fecha_convocatoria',
+        'fecha_inic_preinscrip',
+        'fecha_fin_preinscrip',
+        'fecha_inic_inscripVille',
         'fecha_inic_realiz',
         'fecha_fin_realiz',
+        'fecha_resultados',
         'abierto',
     ];
 }

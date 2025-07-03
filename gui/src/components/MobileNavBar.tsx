@@ -1,25 +1,24 @@
-import { AppShell, Burger, Group, UnstyledButton } from '@mantine/core';
+import { AppShell, Burger, Group, Title, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from '../styles/MobileNavbar.module.css';
-import { LogoImage } from './LogoImage';
+import { IconStar } from '@tabler/icons-react';
 
 export function MobileNavbar() {
   const [opened, { toggle }] = useDisclosure();
 
   return (
-    
     <AppShell
       header={{ height: 60 }}
       navbar={{ width: 300, breakpoint: 'sm', collapsed: { desktop: true, mobile: !opened } }}
       padding="md"
     >
-        <LogoImage src={''} alt={''} />
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
             {/* <MantineLogo size={30} /> */}
+            <Title order={4}>BEBRAS<IconStar color='red' size={20} />CUBA</Title>
             <Group ml="xl" gap={0} visibleFrom="sm">
               <UnstyledButton className={classes.control}>Home</UnstyledButton>
               <UnstyledButton className={classes.control}>Blog</UnstyledButton>

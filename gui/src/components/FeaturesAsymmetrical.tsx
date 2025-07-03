@@ -1,7 +1,6 @@
-import { Text, SimpleGrid, Container, rem, Title } from '@mantine/core';
-import { IconCertificate, IconMedal2, IconAddressBook } from '@tabler/icons-react';
+import { IconCertificate, IconDeviceLaptop, IconMailShare } from '@tabler/icons-react';
+import { Container, SimpleGrid, Text, Title } from '@mantine/core';
 import classes from '../styles/FeaturesAsymmetrical.module.css';
-import classe from '../styles/FeaturesGrid.module.css';
 
 interface FeatureProps extends React.ComponentPropsWithoutRef<'div'> {
   icon: React.FC<any>;
@@ -11,13 +10,11 @@ interface FeatureProps extends React.ComponentPropsWithoutRef<'div'> {
 
 function Feature({ icon: Icon, title, description, className, ...others }: FeatureProps) {
   return (
-
-    
     <div className={classes.feature} {...others}>
       <div className={classes.overlay} />
-      
+
       <div className={classes.content}>
-        <Icon style={{ width: rem(45), height: rem(45) }} className={classes.icon} stroke={1.5} />
+        <Icon size={45} className={classes.icon} stroke={1.5} />
         <Text fw={700} fz="h3" mb="xs" mt={5} className={classes.title}>
           {title}
         </Text>
@@ -31,22 +28,22 @@ function Feature({ icon: Icon, title, description, className, ...others }: Featu
 
 const mockdata = [
   {
-    icon: IconAddressBook,
-    title: 'Inscripción',
+    icon: IconMailShare,
+    title: 'Solicitud de registro',
     description:
-      'La inscripcion es para los profesores o maestros, los cuales pueden registrar sus estudiantes que quieren participar.',
+      'Para participar tienes que hacer solicitud de registro como profesor, debes pertenecer alguna escuela o institución que te permita participar como educador.',
+  },
+  {
+    icon: IconDeviceLaptop,
+    title: 'Inscripción de alumnos',
+    description:
+      'Para inscribir alumno, se debe tener los siguientes datos, su nombre, sexo, grado y el número de ci, se puede inscribir también estudiantes que no son de tu escuela.',
   },
   {
     icon: IconCertificate,
-    title: 'Certificado',
+    title: 'Examen y certificado',
     description:
-      'Despues de cada edicion se genera un certificado de participacion para todos los participantes, estudiantes y profesores.',
-  },
-  {
-    icon: IconMedal2,
-    title: 'Medalla',
-    description:
-      'Las medallas son reconocimiento que da a los estudiantes con mejores puntaciones en el concurso las categorias son de oro, blata y bronze.',
+      'El examen se hace en la página internacional del concurso, después de la evaluación y clasificación se le otorga un cerficado los participantes en esta edición.',
   },
 ];
 
@@ -55,14 +52,10 @@ export function FeaturesAsymmetrical() {
 
   return (
     <Container mt={30} mb={30} size="lg">
-        <Title className={classe.title}>Detalles del concurso</Title>
-
-        <Container size={560} p={0}>
-            <Text size="sm" className={classe.description} mb={50}>
-              En esta parte se comenta detalles sobre la inscripcion, participacion y premiacion.
-            </Text>
-        </Container>
-
+      <Title order={1}  ta="center" mt="sm" className={classes.title}>
+        Proceso de participación
+      </Title>
+      <Text c="dimmed" className={classes.description} ta="center" mt="md" mb={30}></Text>
       <SimpleGrid cols={{ base: 1, sm: 3 }} spacing={50}>
         {items}
       </SimpleGrid>

@@ -1,47 +1,62 @@
-import { Paper, Text, Title, Button, Container, Grid, Tooltip, Group } from '@mantine/core';
-import classes from '../styles/Recurso.module.css';
-import { IconDownload, IconUpload  } from '@tabler/icons-react';
-import { ActionIcon } from '@mantine/core';
-import { IconAdjustments } from '@tabler/icons-react';
+import { Paper, Text, Title, Button, Container, Group } from '@mantine/core';  
+import { IconDownload } from '@tabler/icons-react';  
+import { useEffect, useState } from 'react';  
+import axios from 'axios';  
+axios.defaults.baseURL = 'http://localhost:8000';  
 
-export function Recurso() {
-    return (
+interface RecursoData {  
+    id: number;  
+    nombre: string;  
+    descripcion: string;  
+    archivo_path: string;  
+}  
 
-        <Container mt={50}>
+export function Recurso() {  
+    const [recursos, setRecursos] = useState<RecursoData[]>([]);  
 
-            <Title order={2} size={40} ta="center">Recursos de apoyo al concurso BebrasCuba</Title>
-            <Text c="dimmed" ta="center" mb={30}>Documentos de apoyo y guia de cada convocatoria eso incluye los llamados</Text>
+    useEffect(() => {  
+        const fetchRecursos = async () => {  
+        try {  
+            const response = await axios.get('api/listar-recursos');  
+            setRecursos(response.data);  
+            console.log('Recursos', response.data);  
+        } catch (error) {  
+            console.error('Error al obtener los recursos:', error);  
+        }  
+        };  
+        fetchRecursos();  
+    }, []);  
 
-            <Paper shadow="lg" p="lg" withBorder mb={10}>
-                <Text>Concurso Bebras Cuba – Edición 3</Text>
-                <Group mr={10} justify='space-between'>
-                    <Group>
-                        <Text c="dimmed">
-                            CONVOCATORIA 2024 – primer llamado (breve)
-                        </Text>
-                    </Group>
-                    <Group>
-                        {/* <Button variant="default" rightSection={<IconDownload size={15} />}>Leer archivo</Button> */}
-                        <Button variant="default" rightSection={<IconDownload size={15} />}>Descargar</Button>
-                    </Group>
-                </Group>
-            </Paper>
-            <Paper shadow="lg" p="lg" withBorder >
-                
-                <Text>Concurso Bebras Cuba – Edición 3</Text>
-                <Group mr={10} justify='space-between'>
-                    <Group>
-                        <Text c="dimmed">
-                            CONVOCATORIA 2024 – segundo llamado (breve)
-                        </Text>
-                    </Group>
-                    <Group>
-                        {/* <Button variant="default" rightSection={<IconDownload size={15} />}>Leer archivo</Button> */}
-                        <Button variant="default" rightSection={<IconDownload size={15} />}>Descargar</Button>
-                    </Group>
-                </Group>
-            </Paper>
-            
-        </Container>
-    );
+    return (  
+        <Container mt={50}>  
+        <Title order={2} size={40} ta="center">  
+            Recursos de apoyo al concurso BebrasCuba  
+        </Title>  
+        <Text c="dimmed" ta="center" mb={30}>  
+            Documentos de apoyo y guía de cada convocatoria, eso incluye los llamados  
+        </Text>  
+
+        {recursos.map((recurso) => (  
+            <Paper key={recurso.id} shadow="lg" p="lg" withBorder mb={10}>  
+            <Text>{recurso.nombre}</Text>  
+            <Group mr={10} justify="space-between">  
+                <Group>  
+                <Text c="dimmed">{recurso.descripcion}</Text>  
+                </Group>  
+                <Group>  
+                <Button  
+                    variant="default"  
+                    rightSection={<IconDownload size={15} />}  
+                    component="a"  
+                    href={`http://localhost:8000/api/descargar-recurso/${recurso.archivo_path.split('/').pop()}`} // Ruta para descargar  
+                    download // Forzar la descarga  
+                >  
+                    Descargar  
+                </Button>  
+                </Group>  
+            </Group>  
+            </Paper>  
+        ))}  
+        </Container>  
+    );  
 }
