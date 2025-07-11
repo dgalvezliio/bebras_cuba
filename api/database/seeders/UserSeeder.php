@@ -14,9 +14,14 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'email' => 'dgalvez@uclv.edu.cu', // Aquí se corrige la estructura
-                'password' => bcrypt('dgvezli*7.'), // Asegúrate de encriptar la contraseña
-                'rol' => 'coord_nacional',
+                'nro_ci' => '22101500202',
+                'nombre' => 'Bebras',
+                'apellidos' => 'Cuba',
+                'telefono' => '+5358492211',
+                'email' => 'bebrascuba@uclv.cu', // Aquí se corrige la estructura
+                'rol' => 'admin',
+                'esta_activo' => true,
+                'pin' => '2022',
             ],
         ];
         foreach ($users as $user) {

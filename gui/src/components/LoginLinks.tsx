@@ -50,57 +50,36 @@ export function LoginLinks() {
             let errorMessage = 'Error inesperado. Por favor, inténtalo de nuevo.';
             let errorTitle = 'Error';
             let color = 'red';
-        
             if (axios.isAxiosError(error)) {
-              if (error.response) {
-                // Mapeo de errores específicos del backend
-                switch (error.response.status) {
-                  case 401:
-                    errorTitle = 'Credenciales inválidas';
-                    errorMessage = 'El correo o contraseña son incorrectos';
-                    break;
-                  case 403:
-                    errorTitle = 'Acceso denegado';
-                    if (error.response.data.error === 'No hay edición abierta') {
-                      errorMessage = 'No hay edición abierto, verifique la fecha de apertura en la pagina inicial.';
-                      color = 'blue';
-                    } else if (error.response.data.error === 'El profesor no está activo') {
-                      errorMessage = 'Tu cuenta aún no está activa, está en la proceso de validación.';
-                      color = 'orange';
+                if (error.response) {
+                    // Mapeo de errores específicos del backend
+                    switch (error.response.status) {
+                    case 401:
+                        errorTitle = 'Credenciales inválidas';
+                        errorMessage = 'El correo o contraseña son incorrectos';
+                        break;
+                    case 403:
+                        errorTitle = 'Acceso denegado';
+                        if (error.response.data.error === 'No hay edición abierta') {
+                        errorMessage = 'No hay edición abierto, verifique la fecha de apertura en la pagina inicial.';
+                        color = 'blue';
+                        } else if (error.response.data.error === 'El profesor no está activo') {
+                        errorMessage = 'Tu cuenta aún no está activa, está en la proceso de validación.';
+                        color = 'orange';
+                        }
+                        break;
+                    case 422: 
+                        errorMessage = Object.values(error.response.data.errors).flat().join(', ');
+                        break;
+                    default:
+                        errorMessage = error.response.data.message || errorMessage;
                     }
-                    break;
-                  case 422: 
-                    errorMessage = Object.values(error.response.data.errors).flat().join(', ');
-                    break;
-                  default:
-                    errorMessage = error.response.data.message || errorMessage;
                 }
-              }
             }
-        
-            // // Mostrar notificación con borde
-            // notifications.show({
-            //   title: errorTitle,
-            //   message: errorMessage,
-            //   color,
-            //   icon: color === 'blue' ? <IconAlertCircle size={18} /> : <IconX size={18} />,
-            //   withBorder: true,
-            //   styles: (theme) => ({
-            //     root: {
-            //       borderWidth: 2,
-            //       borderColor: theme.colors[color][6],
-            //       backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-            //     },
-            //     title: {
-            //       fontWeight: 600,
-            //     },
-            //   }),
-            // });
-        
             setError(errorMessage);
-          } finally {
+        } finally {
             setLoading(false);
-          }
+        }
     };
     // Metodo de validacion 
     const form = useForm({

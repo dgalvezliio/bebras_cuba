@@ -215,9 +215,9 @@ class MunicipioSeeder extends Seeder
     // Municipios de Isla de la Juventud  
     ['nombre' => 'Isla de la Juventud', 'codigo' => '4001', 'cdgo_provincia' => '40']  
 ];
-  
-foreach ($municipios as $municipio) { 
-   DB::table('municipios')->insert($municipio);
-}
+    
+    foreach ($municipios as $municipio) { 
+        DB::table('municipios')->insert($municipio);
+    }
 }
 }
