@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
                 'nro_ci' => '22101500202',
                 'nombre' => 'Bebras',
                 'apellidos' => 'Cuba',
-                'telefono' => '+5358492211',
+                'telefono' => '+53 58492211',
                 'email' => 'bebrascuba@uclv.cu', // Aquí se corrige la estructura
                 'rol' => 'admin',
                 'esta_activo' => true,

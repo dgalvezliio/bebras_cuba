@@ -57,15 +57,15 @@ export function GestionarRecurso() {
         setCargar(true);
         // Validación del archivo PDF
         if (!values.archivo || !values.archivo.type.endsWith('pdf')) {
-          notifications.show({
-            title: 'Formato incorrecto',
-            message: 'Debes seleccionar un archivo PDF',
-            color: 'red',
-            icon: <IconX size={18} />,
-          });
-          setCargar(false);
-          return;
-        }
+            notifications.show({
+                title: 'Formato incorrecto',
+                message: 'Debes seleccionar un archivo PDF',
+                color: 'red',
+                icon: <IconX size={20} />,
+            });
+            setCargar(false);
+            return;
+            }
         try {  
             const formData = new FormData();
             formData.append('nombre', values.nombre);
@@ -99,7 +99,7 @@ export function GestionarRecurso() {
             } else {
                 console.error('Error inesperado:', error);
             }
-        
+            
             // Notificación de error
             notifications.show({
                 title: 'Error',

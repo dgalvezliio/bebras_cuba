@@ -48,7 +48,6 @@ export function BarNavInicial() {
                 setIsScrolled(false);  
             }  
         };  
-    
         window.addEventListener('scroll', handleScroll);  
         return () => {  
         window.removeEventListener('scroll', handleScroll);  
@@ -78,14 +77,24 @@ export function BarNavInicial() {
             <Menu.Item disabled leftSection={<IconUsersGroup style={{ width: rem(14), height: rem(14) }} />}>
                 Colaborador  
             </Menu.Item>
-            <Menu.Item 
-            style={{marginRight: rem(50)}}
-            leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
-            component={Link} to="/registro"
-            disabled={!isEditionOpen}
+            {isEditionOpen ? (
+            <Menu.Item
+                style={{ marginRight: rem(50) }}
+                leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
+                component={Link}
+                to="/registro"
             >
-                Profesor   
+                Profesor
             </Menu.Item>
+            ) : (
+            <Menu.Item
+                style={{ marginRight: rem(50) }}
+                leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
+                disabled
+            >
+                Profesor
+            </Menu.Item>
+            )}
             </Menu.Dropdown>
             </Menu>  
         );  
@@ -106,7 +115,6 @@ export function BarNavInicial() {
             setIsScrolled(false);  
             }  
         };  
-    
         window.addEventListener('scroll', handleScroll);  
         return () => {  
             window.removeEventListener('scroll', handleScroll);  
@@ -114,21 +122,18 @@ export function BarNavInicial() {
     }, []);  
 
     return (
-        
         <header  className={`${classes.header} ${isScrolled ? classes.headerFixed : ''}`} >
             <Container size="lg">
                 <div className={classes.inner}>
-                
-                <Title order={4} c={''}>BEBRAS<IconStar color='blue' size={20} />CUBA</Title>
-                
-                <Group gap={5} visibleFrom="sm">
-                    {items}
-                </Group>
-                <Group justify="center">
-                    <ActionToggle />
-                    <Button radius={6} rightSection={<IconLogin2 size={16} />} size='sm' variant='outline' component={Link} to="/acceso" >Iniciar Sesión</Button>
-                </Group>
-                <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
+                    <Title order={4} c={''}>BEBRAS<IconStar color='blue' size={20} />CUBA</Title>
+                    <Group gap={5} visibleFrom="sm">
+                        {items}
+                    </Group>
+                    <Group justify="center">
+                        <ActionToggle />
+                        <Button radius={6} rightSection={<IconLogin2 size={16} />} size='sm' variant='outline' component={Link} to="/acceso" >Iniciar Sesión</Button>
+                    </Group>
+                    <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
                 </div>
             </Container>
         </header>
