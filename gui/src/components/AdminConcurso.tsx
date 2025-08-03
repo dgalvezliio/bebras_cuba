@@ -5,6 +5,7 @@ import { IMaskInput } from 'react-imask';
 import axios from 'axios'; 
 import { isEmail, useForm } from '@mantine/form';
 import { useState } from 'react';
+import { SelectAsync } from './SelectAsync';
 axios.defaults.baseURL = 'http://localhost:8000'; // <--- Ajusta según tu configuración
 
 export function AdminConcurso() {
@@ -88,7 +89,7 @@ export function AdminConcurso() {
             <Title ta={'center'} order={2} mb={10}>Registar Coordinador </Title>
             <Card>
                 <form onSubmit={form.onSubmit(handleSubmit)}>
-                    {/* Inicio del Card Datos Personales */}
+                    {/* Card de Datos Personales */}
                     <Card shadow="sm" withBorder>
                         <Text mb={10} fw={700}>
                             Datos Personales
@@ -153,11 +154,16 @@ export function AdminConcurso() {
                             </Grid.Col>
                         </Grid>
                     </Card>
-                    {/* Inicio del card datos de la cuenta */}
+                    {/* Card de datos de la cuenta */}
                     <Card shadow="sm" withBorder mt={10} mb={10}>
                         <Text fw={700}>
                             Datos de la Cuenta
                         </Text>
+                        <Grid>
+                            <Grid.Col span={6}>
+                                <SelectAsync />
+                            </Grid.Col>
+                        </Grid>
                         <Select
                             withAsterisk
                             clearable

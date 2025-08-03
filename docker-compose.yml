@@ -12,7 +12,6 @@ services:
       - ./gui:/app
     depends_on:
       - backend
-
   backend:
     build:
       context: ./api

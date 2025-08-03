@@ -14,11 +14,14 @@ return new class extends Migration
         // Tabla de migración para coordinadores 
         Schema::create('coordinadores', function (Blueprint $table) {
             $table->id(); // id auto-incremental
-            $table->integer('edicion');
             $table->string('ci',11);
-            // Llave foranea
-            $table->foreign('ci')->references('nro_ci')->on('profesores')->onDelete('cascade'); // Relación con el profesor
-            $table->foreign('edicion')->references('id')->on('ediciones')->onDelete('cascade');
+            $table->string('nombre', 30);
+            $table->string('apellidos', 50);
+            $table->string('correo', 50);
+            $table->string('telefono', 15);
+            $table->boolean('es_nuevo')->default(true);
+            $table->boolean('perfil_editado')->default(false);
+            $table->boolean('esta_activo')->default(true);
             $table->timestamps();
         });
     }

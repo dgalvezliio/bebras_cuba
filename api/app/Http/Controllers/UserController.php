@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Models\Edicion;
 use App\Models\Coordinador;
 
-
 class UserController extends Controller
 {
     // 

@@ -59,7 +59,6 @@ class AuthController extends Controller
                 return response()->json(['error' => 'No hay edición abierta'], 403);
             }
         }
-
         // Manejo para otros roles
         if ($user->rol === 'admin') {
             $profesor = Profesor::where('correo', $user->correo)->first();
@@ -91,12 +90,9 @@ class AuthController extends Controller
 
     }
 
-
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Sesión cerrada exitosamente']);
     }
-
-
 }
