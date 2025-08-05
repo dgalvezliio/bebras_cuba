@@ -104,6 +104,7 @@ class CarreraSeeder extends Seeder
 
    //'Universidad de las Ciencias Informáticas' ==>> 8
    ['Ingeniería en Ciencias Informáticas', 8],
+   
    //'Universidad de Matanzas' ==>> 9
    ['Agronomía', 9],
    ['Medicina Veterinaria y Zootecnia', 9],
@@ -146,7 +147,7 @@ class CarreraSeeder extends Seeder
    ['Licenciatura en Educación Logopedia', 10],
    ['Licenciatura en Educación Lengua Extranjera', 10],
    ['Licenciatura en Educación Preescolar', 10],
-   ['Licenciatura en Educación Pedagogía - Psicología', 10],
+   ['Licenciatura en Educación Pedagogía-Psicología', 10],
    ['Licenciatura en Gestión Sociocultural para el desarrollo', 10],
    ['Licenciatura en Ciencias de la Información', 10],
    ['Licenciatura en Filosofía', 10],
@@ -157,7 +158,7 @@ class CarreraSeeder extends Seeder
    ['Licenciatura en Economía', 11],
    ['Licenciatura en Gestión sociocultural para el desarrollo', 11],
    ['Ingeniería Mecánica', 11],
-   ['Licenciatura en Educación Pedagogía -Psicología', 11],
+   ['Licenciatura en Educación Pedagogía-Psicología', 11],
    ['Licenciatura en Contabilidad y Finanzas', 11],
    ['Agronomía', 11],
    ['Licenciatura en Cultura Física', 11],
@@ -201,7 +202,7 @@ class CarreraSeeder extends Seeder
    ['Licenciatura en Derecho', 14],
    ['Ingeniería Civil', 14],
    ['Licenciatura en Historia', 14],
-   ['Licenciatura en Educación Pedagogía - Psicología', 14],
+   ['Licenciatura en Educación Pedagogía-Psicología', 14],
    ['Licenciatura en Gestión sociocultural para el desarrollo', 14],
    ['Agronomía', 14],
    ['Licenciatura en Periodismo', 14],
@@ -209,7 +210,7 @@ class CarreraSeeder extends Seeder
 
    //'Universidad Vladímir Ilich Lenin de Las Tunas' ==>> 15
    ['Agronomía', 15],
-   ['Licenciatura en Educación Pedagogía-Psicología', 15],
+   ['Licenciatura en Educación Pedagogía Psicología', 15],
    ['Licenciatura en Cultura Física', 15],
    ['Licenciatura en Gestión Sociocultural para el desarrollo', 15],
    ['Licenciatura en Educación Logopedia', 15],
@@ -218,12 +219,12 @@ class CarreraSeeder extends Seeder
 
    //'Universidad de Holguín Oscar Lucero Moya' ==>> 16
    ['Ingeniería Industrial', 16],
-   ['Licenciatura enTurismo', 16],
-   ['Licenciatura en Educación Pedagogía - Psicología', 16],
+   ['Licenciatura en Turismo', 16],
+   ['Licenciatura en Educación Pedagogía-Psicología', 16],
    ['Licenciatura en Educación Logopedia', 16],
    ['Licenciatura en Matemática', 16],
    ['Licenciatura en Cultura Física', 16],
-   ['Licenciatura en Lengua Inglesa (Con segunda Lengua Extranjera )', 16],
+   ['Licenciatura en Lengua Inglesa (con segunda Lengua Extranjera )', 16],
    ['Ingeniería Informática', 16],
    ['Ingeniería Mecánica', 16],
    ['Licenciatura en Gestión sociocultural para el desarrollo', 16],
@@ -276,7 +277,7 @@ class CarreraSeeder extends Seeder
    ['Licenciatura en Física', 19],
    ['Licenciatura en Psicología', 19],
    ['Licenciatura en Ciencias Farmacéuticas', 19],
-   ['Licenciatura en Educación Pedagogía- Psicología', 19],
+   ['Licenciatura en Educación Pedagogía-Psicología', 19],
    ['Licenciatura en Educación Primaria', 19],
    ['Ingeniería Civil', 19],
    ['Licenciatura en Sociología', 19],
@@ -285,7 +286,7 @@ class CarreraSeeder extends Seeder
    ['Ingeniería Mecánica', 19],
    ['Ingeniería Automática', 19],
    ['Licenciatura en Matemática', 19],
-   ['Licenciatura en Lengua Inglesa (Con segunda Lengua extranjera)', 19],
+   ['Licenciatura en Lengua Inglesa (con segunda Lengua extranjera)', 19],
    ['Licenciatura en Periodismo', 19],
    ['Ingeniería Hidráulica', 19],
    ['Licenciatura en Comunicación Social', 19],
@@ -297,7 +298,7 @@ class CarreraSeeder extends Seeder
    ['Ingeniería Eléctrica', 19],
    ['Agronomía', 19],
    ['Licenciatura en Ciencias de la Computación', 19],
-   ['Licenciatura en Educación Español- Literatura', 19],
+   ['Licenciatura en Educación Español-Literatura', 19],
    ['Licenciatura en Cultura Física', 19],
    ['Ingeniería Biomédica', 19],
    ['Ingeniería Informática', 19],
@@ -308,7 +309,7 @@ class CarreraSeeder extends Seeder
    ['Licenciatura en Cultura Física', 20],
    ['Licenciatura en Educación Logopedia', 20],
    ['Licenciatura en Educación Marxismo e Historia', 20],
-   ['Licenciatura en Educación Pedagogía - Psicología', 20],
+   ['Licenciatura en Educación Pedagogía-Psicología', 20],
    ['Licenciatura en Contabilidad y Finanzas', 20],
    ['Licenciatura en Educación Español-Literatura', 20],
    ['Licenciatura en Derecho', 20],
@@ -321,18 +322,18 @@ class CarreraSeeder extends Seeder
     ['Estomatología', 23],
 
    //'Universidad de Ciencias Médicas de La Habana' ==>> 24
-   ['Medicina Facultad Victoria Girón', 24],
+   ['Medicina Facultad “Victoria Girón”', 24],
    ['Medicina Facultad “Comandante Manuel Fajardo”', 24],
    ['Estomatología Facultad “Raúl González”', 24],
-   ['Medicina “Facultad Calixto García”', 24],
+   ['Medicina Facultad “Calixto García”', 24],
    ['Medicina Facultad “Enrique Cabrera”', 24],
    ['Medicina Facultad “Finlay-Albarrán”', 24],
    ['Medicina Facultad “Salvador Allende”', 24],
-   ['Licenciatura en Enfermería (Facultad “Calixto García”)', 24],
+   ['Licenciatura en Enfermería Facultad “Calixto García”', 24],
    ['Medicina Facultad “Miguel Enríquez”', 24],
    ['Medicina Facultad “Julio Trigo”', 24],
    ['Medicina Facultad “10 Octubre”', 24],
-   ['Estomatología Victoria de Girón', 24],
+   ['Estomatología Facultad “Victoria de Girón”', 24],
 
    //'Escuela Latinoamericana de Medicina' ==>> 25
    ['Medicina', 25],

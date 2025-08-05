@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
         ]);
         
         // Ejecutar seeders adicionales
-        $this->call([
-            CarreraSeeder::class,
-        ]);
+        //$this->call([
+        //    CarreraSeeder::class,
+        //    SubsistemaSeeder::class,
+        //]);
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('telefono', 15)->nullable();
             $table->integer('cdgo_municipio');
             $table->string('poblado', 50)->nullable();
-            $table->string('subsistema', 25)->nullable();
+            $table->foreignId('subsistema_id')->constrained('subsistema_esc');
             $table->boolean('validado')->default(false);
             // Llave foranea
             $table->foreign('cdgo_municipio')->references('codigo')->on('municipios')->onDelete('cascade'); 
