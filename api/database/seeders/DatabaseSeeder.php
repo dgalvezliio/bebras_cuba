@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'bebrascuba@uclv.cu',
             'rol' => 'admin',
         ]);
+        
+        // Ejecutar seeders adicionales
+        $this->call([
+            CarreraSeeder::class,
+        ]);
     }
 }

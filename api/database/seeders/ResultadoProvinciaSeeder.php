@@ -15,17 +15,12 @@ class ResultadoProvinciaSeeder extends Seeder
     public function run()
     {
         $resultados = [
-// Datos para la edición número 1
+// Datos para la edición número 1 del 2022
 //prov P del R
             ['id_edicion' => 1, 'id_provincia' => 1, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 1, 'id_provincia' => 1, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 1, 'id_provincia' => 1, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 1, 'id_provincia' => 1, 'id_categoria' => 6, 'cantidad' => 3], // Senior
-//prov I de la J
-            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
-            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
-            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 5, 'cantidad' => 0], // Junior
-            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 6, 'cantidad' => 0], // Senior
 //prov Artemisa
             ['id_edicion' => 1, 'id_provincia' => 2, 'id_categoria' => 3, 'cantidad' => 8], // Benjam�n
             ['id_edicion' => 1, 'id_provincia' => 2, 'id_categoria' => 4, 'cantidad' => 8], // Cadete
@@ -96,122 +91,226 @@ class ResultadoProvinciaSeeder extends Seeder
             ['id_edicion' => 1, 'id_provincia' => 15, 'id_categoria' => 4, 'cantidad' => 11], // Cadete
             ['id_edicion' => 1, 'id_provincia' => 15, 'id_categoria' => 5, 'cantidad' => 24], // Junior
             ['id_edicion' => 1, 'id_provincia' => 15, 'id_categoria' => 6, 'cantidad' => 18], // Senior
+//prov I de la J
+            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
+            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 1, 'id_provincia' => 16, 'id_categoria' => 6, 'cantidad' => 0], // Senior
 
-
-// Datos para la edición número 2
+// Datos para la edición número 2 del 2023
 //prov P del R
             ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 5, 'cantidad' => 7], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 6, 'cantidad' => 17], // Senior
-            ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 7, 'cantidad' => 4], // NOCategoria
-//prov I de la J
-            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 2, 'cantidad' => 0], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 5, 'cantidad' => 0], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 1, 'id_categoria' => 6, 'cantidad' => 21], // Senior
 //prov Artemisa
             ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 2, 'cantidad' => 1], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 3, 'cantidad' => 11], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 3, 'cantidad' => 14], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 4, 'cantidad' => 4], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 5, 'cantidad' => 7], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 6, 'cantidad' => 4], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 7, 'cantidad' => 5], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 5, 'cantidad' => 88], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 2, 'id_categoria' => 6, 'cantidad' => 14], // Senior
 //prov La Habana
-            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 2, 'cantidad' => 3], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 3, 'cantidad' => 8], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 2, 'cantidad' => 4], // Peque
+            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 3, 'cantidad' => 13], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 5, 'cantidad' => 3], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 6, 'cantidad' => 8], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 7, 'cantidad' => 6], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 5, 'cantidad' => 4], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 3, 'id_categoria' => 6, 'cantidad' => 9], // Senior
 //prov Mayabeque
             ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 4, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
 //prov Mtzas
             ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 5, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
 //prov VC
-            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 2, 'cantidad' => 16], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 3, 'cantidad' => 30], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 4, 'cantidad' => 39], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 5, 'cantidad' => 58], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 6, 'cantidad' => 38], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 7, 'cantidad' => 152], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 2, 'cantidad' => 34], // Peque
+            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 3, 'cantidad' => 62], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 4, 'cantidad' => 105], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 5, 'cantidad' => 97], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 6, 'id_categoria' => 6, 'cantidad' => 43], // Senior
 //prov Cfgos
             ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 2, 'cantidad' => 0], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 3, 'cantidad' => 1], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 5, 'cantidad' => 21], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 6, 'cantidad' => 17], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 7, 'cantidad' => 8], // NOCategoria
-
+            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 5, 'cantidad' => 26], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 7, 'id_categoria' => 6, 'cantidad' => 20], // Senior
 //prov SS
             ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 8, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
 //prov CA
             ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 9, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
 //prov Camaguey
             ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 5, 'cantidad' => 0], // Junior
             ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 6, 'cantidad' => 0], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 10, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
 //prov LT
             ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 2, 'cantidad' => 1], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 3, 'cantidad' => 2], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 4, 'cantidad' => 51], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 5, 'cantidad' => 27], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 6, 'cantidad' => 3], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 7, 'cantidad' => 84], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 3, 'cantidad' => 3], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 4, 'cantidad' => 1], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 5, 'cantidad' => 52], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 11, 'id_categoria' => 6, 'cantidad' => 27], // Senior  
 //prov Holguin
             ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 3, 'cantidad' => 3], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 4, 'cantidad' => 11], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 4, 'cantidad' => 13], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 5, 'cantidad' => 1], // Junior
             ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 6, 'cantidad' => 3], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 12, 'id_categoria' => 7, 'cantidad' => 2], // NOCategoria
 //prov Granma
-            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 2, 'cantidad' => 0], // Peque
-            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 2, 'cantidad' => 1], // Peque
+            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 3, 'cantidad' => 6], // Benjam�n
             ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 4, 'cantidad' => 2], // Cadete
             ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 5, 'cantidad' => 9], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 6, 'cantidad' => 8], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 7, 'cantidad' => 9], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 13, 'id_categoria' => 6, 'cantidad' => 13], // Senior
 //prov SCuba
             ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 5, 'cantidad' => 4], // Junior
-            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 6, 'cantidad' => 2], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 7, 'cantidad' => 0], // NOCategoria
+            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 4, 'cantidad' => 4], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 5, 'cantidad' => 2], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 14, 'id_categoria' => 6, 'cantidad' => 0], // Senior
 //prov Guantanamo
             ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 2, 'cantidad' => 0], // Peque
             ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 3, 'cantidad' => 2], // Benjam�n
-            ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 4, 'cantidad' => 1], // Cadete
-            ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 5, 'cantidad' => 8], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 4, 'cantidad' => 2], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 5, 'cantidad' => 9], // Junior
             ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 6, 'cantidad' => 9], // Senior
-		 ['id_edicion' => 2, 'id_provincia' => 15, 'id_categoria' => 7, 'cantidad' => 2] // NOCategoria
+//prov I de la J
+            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 3, 'cantidad' => 0], // Benjam�n
+            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 2, 'id_provincia' => 16, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+
+// Datos para la edición número 3 del 2024
+//prov P del R
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 3, 'cantidad' => 2], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 1, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Artemisa
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 5, 'cantidad' => 33], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 2, 'id_categoria' => 6, 'cantidad' => 22], // Senior
+//prov La Habana
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 2, 'cantidad' => 3], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 3, 'cantidad' => 19], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 3, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Mayabeque
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 4, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Matanzas
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 5, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Villa Clara
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 1, 'cantidad' => 35], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 2, 'cantidad' => 43], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 3, 'cantidad' => 115], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 4, 'cantidad' => 80], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 5, 'cantidad' => 45], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 6, 'id_categoria' => 6, 'cantidad' => 62], // Senior
+//prov Cienfuegos
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 7, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Sancti Spíritus
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 8, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Ciego de Ávila
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 9, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Camagüey
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 10, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Las Tunas
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 11, 'id_categoria' => 6, 'cantidad' => 0], // Senior
+//prov Holguín
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 1, 'cantidad' => 1], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 4, 'cantidad' => 1], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 5, 'cantidad' => 1], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 12, 'id_categoria' => 6, 'cantidad' => 2], // Senior
+//prov Granma
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 1, 'cantidad' => 19], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 2, 'cantidad' => 28], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 3, 'cantidad' => 48], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 5, 'cantidad' => 2], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 13, 'id_categoria' => 6, 'cantidad' => 2], // Senior
+//prov Santiago de Cuba
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 4, 'cantidad' => 5], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 5, 'cantidad' => 5], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 14, 'id_categoria' => 6, 'cantidad' => 1], // Senior
+//prov Guantánamo
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 2, 'cantidad' => 1], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 3, 'cantidad' => 1], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 4, 'cantidad' => 2], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 5, 'cantidad' => 6], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 15, 'id_categoria' => 6, 'cantidad' => 11], // Senior
+//prov Isla de la Juventud
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 1, 'cantidad' => 0], // SuperPeque
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 2, 'cantidad' => 0], // Peque
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 3, 'cantidad' => 0], // Benjamín
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 4, 'cantidad' => 0], // Cadete
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 5, 'cantidad' => 0], // Junior
+            ['id_edicion' => 3, 'id_provincia' => 16, 'id_categoria' => 6, 'cantidad' => 0] // Senior
+
+//Datos de la edición 4 del 2025 - poner , al final línea anterior.
+
         ]; 
         foreach ($resultados as $resultado) {
             DB::table('resultados_provincias')->insert($resultado);
