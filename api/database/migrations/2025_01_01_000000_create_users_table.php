@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('ci',11);
-            $table->string('correo');
-            $table->string('rol', 30);
-            $table->string('contrasenia');
-            $table->string('pin');
-            // Llave foranea 
-            $table->foreign('ci')->references('nro_ci')->on('profesores')->onDelete('cascade');
+            $table->string('nombre', 30);
+            $table->string('apellidos', 50);
+            $table->string('correo',100);
+            $table->string('nro_ci', 11);
+            $table->string('telefono',20);
+            $table->string('contrasenia',255);
+            $table->string('pin',255);
             $table->rememberToken();
             $table->timestamps();
         });
-
+        // 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
