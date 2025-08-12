@@ -13,40 +13,23 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-
     protected $table = 'users';
     
     protected $fillable = [
-        'user_id',
-        'nro_ci',
+        'ci',
         'nombre',
         'apellidos',
-        'correo',
         'telefono',
+        'correo',
         'contrasenia',
         'pin',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'contrasenia',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -55,9 +38,24 @@ class User extends Authenticatable
         ];
     }
     
-    public function profesor() 
+    public function profesor()
     {
-        return $this->belongsTo(Profesor::class, 'nro_ci', 'ci');
+        // users.ci -> profesores.nro_ci
+        return $this->hasOne(Profesor::class, 'nro_ci', 'ci');
     }
-    // 
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'rol_id');
+    }
+
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->where('rol', $roleName)->exists();
+    }
+
+    public function hasAnyRole(array $roleNames): bool
+    {
+        return $this->roles()->whereIn('rol', $roleNames)->exists();
+    }
 }

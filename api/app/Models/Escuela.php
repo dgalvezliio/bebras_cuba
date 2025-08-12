@@ -19,7 +19,7 @@ class Escuela extends Model
         'telefono',
         'cdgo_municipio',
         'poblado',
-        'subsistema',
+        'subsistema_id',
         'validado'
     ];
 

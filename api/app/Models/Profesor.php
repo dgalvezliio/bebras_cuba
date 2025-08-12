@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Escuela;
 use App\Models\Estudiante;
 use App\Models\User;
-use App\Models\Coordinador;
 
 class Profesor extends Model
 {
@@ -47,7 +46,8 @@ class Profesor extends Model
     
     public function usuario() 
     {
-        return $this->hasOne(Usuario::class, 'nro_ci', 'ci');
+        // profesores.nro_ci -> users.ci
+        return $this->belongsTo(User::class, 'nro_ci', 'ci');
     }
     
 }

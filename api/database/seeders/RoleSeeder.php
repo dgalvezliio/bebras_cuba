@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class RolSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $roles = [
@@ -27,6 +24,7 @@ class RolSeeder extends Seeder
             ['rol' => 'Colaborador Bebras', 'descripcion' => 'Colaborador del concurso Bebras de cualquier institución (no estudiante universitario)', 'estado' => true],
             ['rol' => 'Colaborador Bebras FEU', 'descripcion' => 'Colaborador Bebras Estudiante Universitario (FEU)', 'estado' => true],
         ];
+
         foreach ($roles as $rol) {
             DB::table('roles')->insert([
                 'rol' => $rol['rol'],
