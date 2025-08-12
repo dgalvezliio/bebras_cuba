@@ -39,6 +39,18 @@ class EdicionesSeeder extends Seeder
                 'fecha_resultados' => '22-01-2024',
                 'abierto' => false,
             ],
+            [
+                'n_edicion' => 3,
+                'a_edicion' => 2024,
+                'fecha_convocatoria' => '06-11-2024',
+                'fecha_inic_preinscrip' => '11-11-2024',
+                'fecha_fin_preinscrip' => '09-12-2024',
+                'fecha_inic_inscripVille' => '01-12-2024',
+                'fecha_inic_realiz' => '09-12-2024',
+                'fecha_fin_realiz' => '17-01-2025',
+                'fecha_resultados' => '07-02-2025',
+                'abierto' => false,
+            ]
         ];
 
         foreach ($ediciones as $edicion) {
